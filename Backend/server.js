@@ -15,6 +15,11 @@ mongoose.connect(dbURL).then(()=>{
 // Middleware to parse JSON bodies
 app.use(express.json()); 
 
-app.use("/api/civianalytics",routes);
+app.use((req, res, next) => {
+   console.log(`${req.method} request for '${req.url}'`);
+    next();
+});
+
+app.use("/api",routes);
 
 

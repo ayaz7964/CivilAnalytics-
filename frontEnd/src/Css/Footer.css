@@ -1,0 +1,166 @@
+.FooterPro {
+  background: #223040;
+  color: #eaf6fb;
+  padding: 40px 0 0 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  /* border-radius: 16px 16px 0 0; */
+  margin-top: 0px;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+}
+
+.FooterPro-Top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 32px 40px;
+  gap: 32px;
+}
+
+.FooterPro-Newsletter {
+  flex: 1 1 260px;
+  min-width: 240px;
+  margin-bottom: 24px;
+}
+
+.FooterPro-Newsletter h2 {
+  color: #3ed1e8;
+  font-size: 1.5rem;
+  margin-bottom: 0.2em;
+  font-weight: 700;
+}
+
+.FooterPro-Newsletter p {
+  margin-bottom: 1em;
+  color: #b6d6e6;
+}
+
+.FooterPro-NewsletterForm {
+  display: flex;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.FooterPro-NewsletterInput {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+  outline: none;
+  width: 180px;
+  background: #2d4156;
+  color: #eaf6fb;
+}
+
+.FooterPro-NewsletterBtn {
+  background: #3ed1e8;
+  color: #223040;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.FooterPro-NewsletterBtn:hover {
+  background: #00bcd4;
+  color: #fff;
+}
+
+.FooterPro-Org {
+  flex: 1 1 260px;
+  min-width: 240px;
+  margin-bottom: 24px;
+}
+
+.FooterPro-OrgLogo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.FooterPro-LogoIcon {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.FooterPro-LogoText {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.FooterPro-OrgDesc p {
+  margin: 0 0 10px 0;
+  color: #b6d6e6;
+  font-size: 0.98rem;
+}
+
+.FooterPro-Social {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.FooterPro-SocialIcon {
+  font-size: 1.3rem;
+  color: #eaf6fb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.FooterPro-SocialIcon:hover {
+  color: #3ed1e8;
+}
+
+.FooterPro-Links {
+  flex: 2 1 400px;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  min-width: 320px;
+}
+
+.FooterPro-Links h4 {
+  color: #3ed1e8;
+  font-size: 1.08rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.FooterPro-Links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.FooterPro-Links li {
+  margin-bottom: 8px;
+}
+
+.FooterPro-Links a {
+  color: #eaf6fb;
+  text-decoration: none;
+  font-size: 0.98rem;
+  transition: color 0.2s;
+}
+
+.FooterPro-Links a:hover {
+  color: #3ed1e8;
+  text-decoration: underline;
+}
+
+.FooterPro-Bottom {
+  border-top: 1px solid #2d4156;
+  text-align: center;
+  padding: 18px 10px 12px 10px;
+  font-size: 0.97rem;
+  color: #b6d6e6;
+  background: #223040;
+  border-radius: 0 0 16px 16px;
+  margin-top: 10px;
+}

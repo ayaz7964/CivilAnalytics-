@@ -96,7 +96,7 @@ routes.put('/:id', async (req, res) => {
     }
 })
 
-routes.post('/singup', async (req, res) => {
+routes.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
 
     const existingUser = await user.find({ email });
@@ -110,7 +110,7 @@ routes.post('/singup', async (req, res) => {
     });
     try {
         await newUser.save();
-        res.status(201).json({ user: newUser });
+        res.status(201).json({ success: true ,user: newUser });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -132,6 +132,47 @@ routes.post('/survey', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 })
+ 
+// fetching data for login authentication from user  and 
+// routes.post('/login', async (req, res) => {
+//     const { email, password } = req.body;
+
+//     try {
+//         const userData = await
+//         user.findOne({ email, password });  
+//         if (!userData) {
+//             return res.status(400).json({ error: 'Invalid email or password' });
+//         }
+//         res.status(200).json({ user: userData });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Server error' });
+//     }
+// }
+// )
+
+routes.post('/login', async (req, res) => {
+    const { identifier, password } = req.body; // Accepts either email or username
+
+    try {
+        // Find user by email or username
+        const userData = await user.findOne({
+            $or: [
+                { email: identifier },
+                { username: identifier }
+            ],
+            password // For demo only; in production, use hashed passwords!
+        });
+
+        if (!userData) {
+            return res.status(400).json({ error: 'Invalid username/email or password' });
+        }
+
+        res.status(200).json({ user: userData });
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 
 
 

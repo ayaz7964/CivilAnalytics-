@@ -1,0 +1,131 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #23447c 60%, #5b2be7 100%);
+  padding: 0.5rem 2rem;
+  height: 64px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo-img {
+  height: 40px;
+  width: 40px;
+  margin-right: 0.5rem;
+}
+
+.navbar-logo-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffd600;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 1px 1px 4px #2222;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li a {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+  padding-bottom: 2px;
+}
+
+.navbar-links li a:hover,
+.navbar-links li a.active {
+  color: #ffd600;
+  border-bottom: 2px solid #ffd600;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2rem;
+  padding: 0.2rem 1rem;
+  margin: 0 2rem;
+}
+
+.navbar-search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  width: 180px;
+  font-style: italic;
+}
+
+.navbar-search input::placeholder {
+  color: #e0e0e0;
+  opacity: 1;
+}
+
+.navbar-search .search-icon {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-username {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 0.5rem;
+}
+
+.navbar-username::before {
+  content: '';
+  display: inline-block;
+  background: url('/user-icon.png') no-repeat center/cover;
+  width: 24px;
+  height: 24px;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+.navbar-logout {
+  background: transparent;
+  border: 1.5px solid #ffd600;
+  color: #ffd600;
+  padding: 0.4rem 1.1rem;
+  border-radius: 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navbar-logout:hover {
+  background: #ffd600;
+  color: #2d2d2d;
+}
