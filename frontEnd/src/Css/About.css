@@ -1,0 +1,156 @@
+.about-container {
+  max-width: 1100px;
+  margin: 36px auto;
+  padding: 32px 18px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.about-hero {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.about-hero h1 {
+  font-size: 2.5rem;
+  color: #1976d2;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.brand {
+  color: #43a047;
+}
+
+.about-tagline {
+  color: #388e3c;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.about-section {
+  margin: 36px 0;
+  background: #f5f7fa;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 1px 4px rgba(26,35,126,0.03);
+}
+
+.about-section h2 {
+  color: #1976d2;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.about-section h3 {
+  color: #3949ab;
+  margin-bottom: 10px;
+}
+
+.about-features-list {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.about-feature {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px 16px;
+  box-shadow: 0 1px 4px rgba(26,35,126,0.06);
+  flex: 1 1 220px;
+  min-width: 200px;
+  max-width: 320px;
+  text-align: center;
+}
+
+.about-icon {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.about-benefits ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #263238;
+  font-size: 1.08rem;
+}
+
+.about-team-list {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.about-team-member {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(26,35,126,0.06);
+  text-align: center;
+  width: 180px;
+}
+
+.about-team-member img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 2px solid #1976d2;
+}
+
+.about-team-member h4 {
+  margin: 8px 0 4px 0;
+  color: #1976d2;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.about-team-member p {
+  color: #757575;
+  font-size: 0.98rem;
+}
+
+.about-contact a {
+  color: #1976d2;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.about-quote {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.about-quote blockquote {
+  font-size: 1.25rem;
+  color: #616161;
+  font-style: italic;
+  border-left: 4px solid #1976d2;
+  padding-left: 16px;
+  display: inline-block;
+  background: #f5f7fa;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .about-features-list, .about-team-list {
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .about-feature, .about-team-member {
+    max-width: 100%;
+  }
+}

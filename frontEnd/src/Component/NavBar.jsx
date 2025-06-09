@@ -13,21 +13,21 @@ export default function NavBar() {
       </div>
       <ul className="NavBar-Links">
         <li className="NavBar-Link"><Link to = '/home' className='NavBar-Link'>Home</Link></li>
-        <li className="NavBar-Link">LeaderBord</li>
-        <li className="NavBar-Link">About</li>
-        <li className="NavBar-Link">Contact</li>
+        <li className="NavBar-Link"><Link to = 'LeaderBord'className="NavBar-Link" >LeaderBord</Link></li>
+        <li className="NavBar-Link"> <Link to = '/about' className="NavBar-Link" >About</Link></li>
+        <li className="NavBar-Link"> <Link to =  '/contact' className="NavBar-Link" >Contact</Link></li>
       </ul>
-      <div className="NavBar-SearchSection">
+      {/* <div className="NavBar-SearchSection">
         <input
           className="NavBar-SearchInput"
           type="text"
           placeholder="Search surveys, topics..."
         />
         <button className="NavBar-SearchButton" aria-label="Search">🔍</button>
-      </div>
+      </div> */}
       <div className="NavBar-ProfileSection">
-        <span className="NavBar-Profile-Icon" aria-label="User">👤</span>
-        <span className="NavBar-Profile-Name">Username</span>
+        {/* <span className="NavBar-Profile-Icon" aria-label="User">👤</span>
+        <span className="NavBar-Profile-Name">Username</span> */}
         <p><Link to= "/login" className="NavBar-LoginBtn" >Login</Link></p>
         <p ><Link to = '/signup' className="NavBar-SignUpBtn">Sign Up</Link></p>
       </div>

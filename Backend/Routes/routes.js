@@ -3,6 +3,7 @@ const routes = express()
 
 const mongose = require('mongoose')
 const countires = require('../Modules/countries')
+const profile = require('../Modules/profile')
 const user = require('../Modules/user')
 const Survey = require('../Modules/servay')
 
@@ -67,6 +68,69 @@ routes.delete('/:id', async (req, res) => {
         res.status(500).json({ error: 'Failed to delete country' });
     }
 })
+// routing or adding the data in profile 
+// Create profile (only if not exists)
+routes.post('/profile', async (req, res) => {
+    const { username, email, fullName, country, city, address, phone,password } = req.body;
+    try {
+        // Prevent duplicate profiles for same username or email
+        const existing = await profile.findOne({ $or: [{ username }, { email }] });
+        if (existing) {
+            return res.status(400).json({ error: 'Profile already exists for this user.' });
+        }
+        const newProfile = new profile({
+            username,
+            email,
+            fullName,
+            country,
+            city,
+            address,
+            phone,
+            password
+        });
+        await newProfile.save();
+        res.status(201).json(newProfile);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Update profile by username (only allowed fields)
+routes.put('/profile/username/:username', async (req, res) => {
+    const { username } = req.params;
+    // Only allow updating these fields
+    const { fullName, country, city, address, phone } = req.body;
+    try {
+        const updated = await profile.findOneAndUpdate(
+            { username },
+            { fullName, country, city, address, phone },
+            { new: true }
+        );
+        if (!updated) {
+            return res.status(404).json({ error: 'No such profile found or exists' });
+        }
+        res.status(200).json(updated);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// Get profile by username
+routes.get('/profile/username/:username', async (req, res) => {
+    const { username } = req.params;
+    try {
+        const userProfile = await profile.findOne({ username });
+        if (!userProfile) {
+            return res.status(404).json({ error: 'Profile not found' });
+        }
+        res.status(200).json(userProfile);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+
+
 routes.put('/:id', async (req, res) => {
     const { id } = req.params;
     if (!mongose.Types.ObjectId.isValid(id)) {
@@ -116,22 +180,38 @@ routes.post('/signup', async (req, res) => {
     }
 })
 
-// storing the servey data of individual user
-routes.post('/survey', async (req, res) => {
-    const { userId, country, scores, totalScore } = req.body;
-    const survey = new Survey({
-        userId,
-        country,
-        scores,
-        totalScore
-    });
-    try {
-        await survey.save();
-        res.status(201).json({ survey });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-})
+// // storing the servey data of individual user
+// routes.post('/survey', async (req, res) => {
+//     const { username, country, scores, totalScore } = req.body;
+
+//     // Check if user has submitted a survey in the last 30 days
+//     const oneMonthAgo = new Date();
+//     oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+//     try {
+//         const recentSurvey = await Survey.findOne({
+//             username,
+//             country,
+//             createdAt: { $gte: oneMonthAgo }
+//         });
+
+//         // if (recentSurvey) {
+//         //     return res.status(400).json({ error: "You can only submit the survey once every 30 days." });
+//         // }
+
+//         const survey = new Survey({
+//             username,
+//             country,
+//             scores,
+//             totalScore
+//         });
+
+//         await survey.save();
+//         res.status(201).json({ survey });
+//     } catch (error) {
+//         res.status(400).json({ error: error.message });
+//     }
+// });
  
 // fetching data for login authentication from user  and 
 // routes.post('/login', async (req, res) => {
@@ -174,6 +254,80 @@ routes.post('/login', async (req, res) => {
 });
 
 
+
+
+
+
+
+
+const Countries = require('../Modules/countries');
+
+routes.post('/survey', async (req, res) => {
+    const { username, country, scores, totalScore } = req.body;
+
+    if (!username || !country || !scores || typeof totalScore !== 'number') {
+        return res.status(400).json({ error: "All fields are required." });
+    }
+
+    // Check if user has submitted a survey in the last 30 days
+    try {
+        const lastSurvey = await Survey.findOne({ username, country }).sort({ createdAt: -1 });
+
+        if (lastSurvey) {
+            const now = new Date();
+            const lastDate = new Date(lastSurvey.createdAt);
+            const diff = now - lastDate;
+            const days = diff / (1000 * 60 * 60 * 24);
+
+            if (days < 30) {
+                const nextAllowed = new Date(lastSurvey.createdAt);
+                nextAllowed.setDate(nextAllowed.getDate() + 30);
+                return res.status(400).json({
+                    error: "You can only submit the survey once every 30 days.",
+                    nextAllowed
+                });
+            }
+        }
+
+        // Save survey
+        const survey = new Survey({
+            username,
+            country,
+            scores,
+            totalScore
+        });
+        await survey.save();
+
+        // Update or create country stats
+        let countryDoc = await Countries.findOne({ CountryName: country });
+        if (countryDoc) {
+            countryDoc.TotalUser += 1;
+            countryDoc.TotalScore += totalScore;
+            countryDoc.Healthcare += scores.healthcare;
+            countryDoc.Education += scores.education;
+            countryDoc.Employment += scores.employment;
+            countryDoc.Transportation += scores.transportation;
+            countryDoc.PublicSafety += scores.publicSafety;
+            await countryDoc.save();
+        } else {
+            countryDoc = new Countries({
+                CountryName: country,
+                TotalUser: 1,
+                TotalScore: totalScore,
+                Healthcare: scores.healthcare,
+                Education: scores.education,
+                Employment: scores.employment,
+                Transportation: scores.transportation,
+                PublicSafety: scores.publicSafety
+            });
+            await countryDoc.save();
+        }
+
+        res.status(201).json({ survey, country: countryDoc });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
 
 
 module.exports = routes ;

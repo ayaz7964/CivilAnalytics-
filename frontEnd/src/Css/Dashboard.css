@@ -1,0 +1,215 @@
+.dashboardContainer {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header h2 {
+  margin-bottom: 8px;
+  color: #1a237e;
+}
+
+.motivation {
+  color: #388e3c;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.statsSection {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 32px;
+}
+
+.statCard {
+  background: #f5f7fa;
+  border-radius: 12px;
+  padding: 24px 32px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(26,35,126,0.05);
+  flex: 1;
+  margin: 0 12px;
+}
+
+.statCard h3 {
+  color: #3949ab;
+  margin-bottom: 12px;
+}
+
+.statNumber {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.mainContent {
+  display: flex;
+  gap: 32px;
+}
+
+.leftPanel, .centerPanel, .rightPanel {
+  flex: 1;
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(26,35,126,0.03);
+}
+
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.surveyButton {
+  background: linear-gradient(90deg, #1976d2 60%, #43a047 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  margin: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.surveyButton:hover {
+  background: linear-gradient(90deg, #1565c0 60%, #388e3c 100%);
+}
+
+.activityList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activityList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e3e6ee;
+  font-size: 1rem;
+}
+
+.activityDate {
+  color: #757575;
+  width: 110px;
+}
+
+.activityAction {
+  color: #263238;
+  font-weight: 500;
+}
+
+.countryList {
+  list-style: decimal;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.countryName {
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.countryScore {
+  float: right;
+  color: #388e3c;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .mainContent {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .statsSection {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .statCard {
+    margin: 8px 0;
+  }
+}
+
+/* ...existing code... */
+
+.progressSection {
+  margin: 24px 0 32px 0;
+  text-align: center;
+}
+
+.progressBarBackground {
+  width: 80%;
+  height: 18px;
+  background: #e3e6ee;
+  border-radius: 10px;
+  margin: 0 auto 8px auto;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #1976d2 60%, #43a047 100%);
+  border-radius: 10px 0 0 10px;
+  transition: width 0.5s;
+}
+
+.progressText {
+  font-size: 1rem;
+  color: #3949ab;
+  font-weight: 500;
+}
+
+.fieldList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fieldList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e3e6ee;
+  font-size: 1rem;
+}
+
+.fieldName {
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.fieldScore {
+  color: #388e3c;
+  font-weight: 600;
+}
+
+.quoteSection {
+  margin-top: 36px;
+  text-align: center;
+}
+
+.quoteSection blockquote {
+  font-size: 1.2rem;
+  color: #616161;
+  font-style: italic;
+  border-left: 4px solid #1976d2;
+  padding-left: 16px;
+  display: inline-block;
+  background: #f5f7fa;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+/* ...existing code... */

@@ -1,231 +1,233 @@
-import React from 'react'
-import '../Css/Home.css'
-import { useUser } from '../User/UserContext';
+import React, { useEffect, useState } from 'react';
+import '../Css/Home.css';
 
+const satisfiedCountries = [
+  { name: "Pakistan", image: "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg" },
+  { name: "France", image: "https://cdn.pixabay.com/photo/2017/08/25/20/04/international-2681245_1280.jpg" },
+  { name: "China", image: "https://cdn.pixabay.com/photo/2017/08/29/22/10/germany-2695058_1280.jpg" },
+  { name: "UK", image: "https://cdn.pixabay.com/photo/2017/08/28/18/51/international-2690850_1280.jpg" },
+  { name: "USA", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+];
 
 export default function Home() {
-  const satisfiedCountries = [
-    {
-      name: "Pakistan",
-      image:
-        "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg",
-      satisfaction: 90,
-    },
-    {
-      name: "Canada",
-      image:
-        "https://cdn.pixabay.com/photo/2017/08/25/20/04/international-2681245_1280.jpg",
-      satisfaction: 85,
-    },
-    {
-      name: "Germany",
-      image:
-        "https://cdn.pixabay.com/photo/2017/08/29/22/10/germany-2695058_1280.jpg",
-      satisfaction: 80,
-    },
-    {
-      name: "Australia",
-      image:
-        "https://cdn.pixabay.com/photo/2017/08/28/18/51/international-2690850_1280.jpg",
-      satisfaction: 95,
-    },
-    {
-      name: "Japan",
-      image:
-        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
-      satisfaction: 88,
-    },
-    // {
-    //   name: "UK",
-    //   image:
-    //     "https://cdn.pixabay.com/photo/2020/11/08/15/47/flag-5724142_1280.jpg",
-    //   satisfaction: 82,
-    // },
-    // {
-    //   name: "France",
-    //   image:
-    //     "https://cdn.pixabay.com/photo/2015/10/17/23/07/flag-993627_1280.jpg",
-    //   satisfaction: 78,
-    // },
-    // {
-    //   name: "Afghanistan",
-    //   image:
-    //     "https://media.istockphoto.com/id/1251374765/photo/the-national-flag-of-afghanistan.jpg?s=612x612&w=0&k=20&c=3p-_WkQVJxdGNQxUY3oIxpwHEdDAG0QJQ3ytf8uogMg=",
-    //   satisfaction: 84,
-    // },
-    // {
-    //   name: "Brazil",
-    //   image:
-    //     "https://cdn.pixabay.com/photo/2017/08/28/19/01/international-2690912_1280.jpg",
-    //   satisfaction: 76,
-    // },
-    // {
-    //   name: "South Korea",
-    //   image:
-    //     "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/1200px-Flag_of_the_United_Arab_Emirates.svg.png",
-    //   satisfaction: 89,
-    // },
-    
-    
-  ];
+  const [countries, setCountries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Sort countries by satisfaction level (high to low)
-  const sortedCountries = satisfiedCountries.sort(
-    (a, b) => b.satisfaction - a.satisfaction
+  useEffect(() => {
+    fetch('/api/')
+      .then(res => res.json())
+      .then(data => {
+        setCountries(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const avgDomain = (country, domain) =>
+    country.TotalUser > 0
+      ? ((country[domain] / (country.TotalUser * 20)) * 100).toFixed(1)
+      : 'N/A';
+
+  const countrySatisfaction = (country) =>
+    country.TotalUser > 0
+      ? ((country.TotalScore / (country.TotalUser * 100)) * 100).toFixed(1)
+      : 'N/A';
+
+  const getCountryImage = (name) => {
+    const found = satisfiedCountries.find(
+      (c) => c.name.toLowerCase() === name.toLowerCase()
+    );
+    return found ? found.image : "https://via.placeholder.com/320x120?text=No+Image";
+  };
+
+  // Sort all countries for global ranking
+  const rankedCountries = [...countries].sort(
+    (a, b) => countrySatisfaction(b) - countrySatisfaction(a)
   );
-  const { state } = useUser();
-if (state.user) {
-  console.log(state.user.username, state.user.email);
-}
+  // Top 5 for display
+  const sortedCountries = rankedCountries.slice(0, 5);
+
+  // Global averages for insights
+  const globalStats = (() => {
+    if (!countries.length) return {};
+    const domains = ['Healthcare', 'Education', 'Employment', 'Transportation', 'PublicSafety'];
+    const totalUsers = countries.reduce((sum, c) => sum + c.TotalUser, 0);
+    const avg = {};
+    domains.forEach(domain => {
+      const sum = countries.reduce((acc, c) => acc + (c[domain] || 0), 0);
+      avg[domain] = totalUsers > 0 ? ((sum / (totalUsers * 20)) * 100).toFixed(1) : 'N/A';
+    });
+    const totalScore = countries.reduce((acc, c) => acc + (c.TotalScore || 0), 0);
+    avg.Overall = totalUsers > 0 ? ((totalScore / (totalUsers * 100)) * 100).toFixed(1) : 'N/A';
+    return avg;
+  })();
+
+  // Featured country (the #1 ranked)
+  const featured = rankedCountries[0];
 
   return (
-    <div className="home-container">
+    <div className="dashboardContainer">
       {/* Welcome Section */}
-      <div className="welcome-section">
-        <img
-          src="https://cdn.pixabay.com/photo/2015/05/28/14/53/ux-788002_1280.jpg"
-          alt="Welcome"
-          className="welcome-image"
-        />
-        <div className="welcome-text">
-          <h1>Welcome to Our Website</h1>
-        </div>
+      <div className="header">
+        <h2>🌍 Global Country Satisfaction Dashboard</h2>
+        <p className="motivation">
+          Explore the top 5 countries by citizen satisfaction. Your feedback shapes a better world!
+        </p>
       </div>
-      {/* Top Satisfied Countries Section */}
-      <div className="satisfied-countries-section">
-        <h2>Top Satisfied Countries</h2>
-        <div className="countries-container">
-          {sortedCountries.map((country, index) => (
-            <div className="country-card" key={index}>
-              {index+1}
-              <img
-                src={country.image}
-                alt={country.name}
-                className="country-image"
-              />
-              <h3>{country.name}</h3>
-              <div className="progress-bar">
-                <div
-                  className="progress"
-                  style={{ width: `${country.satisfaction}%` }}
-                ></div>
-              </div>
-              <p>{country.satisfaction}% Satisfaction</p>
+
+      {/* Featured Country Section */}
+      {featured && (
+        <div className="featured-country-section">
+          <div className="featured-img-wrap">
+            <img
+              src={getCountryImage(featured.CountryName)}
+              alt={featured.CountryName}
+              className="featured-country-image"
+              onError={e => { e.target.src = "https://via.placeholder.com/320x120?text=No+Image"; }}
+            />
+          </div>
+          <div className="featured-country-info">
+            <div className="featured-rank">#1</div>
+            <h2>{featured.CountryName} <span className="featured-badge">Top Ranked</span></h2>
+            <div className="progressBarBackground main-bar">
+              <div
+                className="progressBarFill"
+                style={{
+                  width: `${countrySatisfaction(featured)}%`,
+                  background: 'linear-gradient(90deg, #ff9800 0%, #43a047 100%)',
+                }}
+              ></div>
             </div>
-          ))}
+            <div className="progressText">
+              <strong>Overall Satisfaction:</strong>
+              <span className="country-score">{countrySatisfaction(featured)}%</span>
+            </div>
+            <div className="featured-country-users">
+              <span>👥 {featured.TotalUser} users</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Horizontal Scrollable Countries */}
+      <div className="country-scroll-section">
+        {loading ? (
+          <div style={{ width: '100%', textAlign: 'center' }}>
+            <h3>Loading countries...</h3>
+          </div>
+        ) : sortedCountries.length === 0 ? (
+          <div style={{ width: '100%', textAlign: 'center' }}>
+            <h3>No country data available.</h3>
+          </div>
+        ) : (
+          <div className="country-row">
+            {sortedCountries.map((country, idx) => {
+              const satisfaction = countrySatisfaction(country);
+              const domains = [
+                { label: "Healthcare", value: avgDomain(country, 'Healthcare') },
+                { label: "Education", value: avgDomain(country, 'Education') },
+                { label: "Employment", value: avgDomain(country, 'Employment') },
+                { label: "Transportation", value: avgDomain(country, 'Transportation') },
+                { label: "Public Safety", value: avgDomain(country, 'PublicSafety') },
+              ];
+              // Find global ranking
+              const globalRank = rankedCountries.findIndex(
+                c => c.CountryName === country.CountryName
+              ) + 1;
+              return (
+                <div className="country-card" key={country._id || idx}>
+                  <div className="country-rank-badge">#{globalRank}</div>
+                  <div className="country-flag-wrap">
+                    <img
+                      src={getCountryImage(country.CountryName)}
+                      alt={country.CountryName}
+                      className="country-image"
+                      onError={e => { e.target.src = "https://via.placeholder.com/320x120?text=No+Image"; }}
+                    />
+                  </div>
+                  <h3 className="country-title">{country.CountryName}</h3>
+                  <div className="progressBarBackground main-bar">
+                    <div
+                      className="progressBarFill"
+                      style={{
+                        width: `${satisfaction}%`,
+                        background: 'linear-gradient(90deg, #ff9800 0%, #43a047 100%)',
+                      }}
+                    ></div>
+                  </div>
+                  <div className="progressText">
+                    <strong>Overall Satisfaction:</strong>
+                    <span className="country-score">{satisfaction}%</span>
+                  </div>
+                  <ul className="fieldList">
+                    {domains.map((domain, i) => (
+                      <li key={i}>
+                        <span className="fieldName">{domain.label}</span>
+                        <span className="fieldScore">{domain.value}%</span>
+                        <div className="progressBarBackground domain-bar">
+                          <div
+                            className="progressBarFill"
+                            style={{
+                              width: `${domain.value}%`,
+                              background: 'linear-gradient(90deg, #1976d2 0%, #00bcd4 100%)',
+                              height: 18,
+                            }}
+                          ></div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="country-users">
+                    <span>👥 {country.TotalUser} users</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Global Insights Section */}
+      <div className="global-insights">
+        <h2>🌟 Global Insights</h2>
+        <div className="global-avg-row">
+          <div className="global-avg-card">
+            <span className="global-label">Overall</span>
+            <span className="global-value">{globalStats.Overall}%</span>
+          </div>
+          <div className="global-avg-card">
+            <span className="global-label">Healthcare</span>
+            <span className="global-value">{globalStats.Healthcare}%</span>
+          </div>
+          <div className="global-avg-card">
+            <span className="global-label">Education</span>
+            <span className="global-value">{globalStats.Education}%</span>
+          </div>
+          <div className="global-avg-card">
+            <span className="global-label">Employment</span>
+            <span className="global-value">{globalStats.Employment}%</span>
+          </div>
+          <div className="global-avg-card">
+            <span className="global-label">Transport</span>
+            <span className="global-value">{globalStats.Transportation}%</span>
+          </div>
+          <div className="global-avg-card">
+            <span className="global-label">Safety</span>
+            <span className="global-value">{globalStats.PublicSafety}%</span>
+          </div>
         </div>
       </div>
 
-     <div className="countries-container" id="tm">
-     <h1>1</h1>
-      
-                <img
-                  src={satisfiedCountries[0].image}
-                  alt={satisfiedCountries[0].name}
-                  className="country-image"
-                />
-                <h3>{satisfiedCountries[0].name}</h3>
-               <div className="progress-bar">
-                <div
-                  className="progress"
-                  style={{ width: `${satisfiedCountries[0].satisfaction}%` }}
-                ></div>
-              </div>
-               <p>{satisfiedCountries[0].satisfaction}% Satisfaction</p>
-             
-
-              
-     </div>
-
-      <div className="our-aim-section">
-        <h2>Our Aim</h2>
-        <p>
-          "Our mission is to amplify citizen voices, measure public
-          satisfaction, and inspire meaningful improvements in services across
-          the world."
-        </p>
-      </div>
-      {/* Benefits Section */}
-      <div className="benefits-section">
-        <div className="benefit">
-          <h2> Quick Access to Key Insights</h2>
-          <p className="benefit-text">
-            Instantly view satisfaction scores across various services
-            (healthcare, education, etc.), providing an immediate understanding
-            of national performance.
-          </p>
-        </div>
-        <div className="benefit">
-          <h2>Informed Participation</h2>
-          <p className="benefit-text">
-            By seeing your country’s ratings, you can make more informed
-            decisions when providing your feedback, knowing exactly where your
-            country stands.
-          </p>
-        </div>
-        <div className="benefit">
-          <h2>Direct Impact</h2>
-          <p className="benefit-text">
-            Your participation helps update and influence the satisfaction
-            percentage, allowing you to contribute to the national improvement
-            process.
-          </p>
-        </div>
-      </div>
-
-      {/* About Us Section */}
-      <div className="about-section">
-        <h2>About Us</h2>
-        <p>
-          At CitizenView, our mission is to empower citizens by providing a
-          platform where they can share their opinions and experiences regarding
-          national services. We believe that understanding public satisfaction
-          is crucial for driving meaningful improvements in services such as
-          healthcare, education, and governance. Our platform enables
-          individuals to participate in anonymous surveys that measure the
-          quality of services in their country. By collecting real-time data and
-          satisfaction scores, we provide governments, organizations, and
-          citizens with actionable insights to foster transparency and progress.
-          With a focus on simplicity, security, and reliability, we strive to
-          create a global community where every voice is heard, and every
-          opinion contributes to a better future.
-        </p>
-        <div className="developer-section">
-          <div className="developer-box">
-            <img
-              src="https://img.freepik.com/free-photo/lifestyle-people-emotions-casual-concept-confident-nice-smiling-asian-woman-cross-arms-chest-confident-ready-help-listening-coworkers-taking-part-conversation_1258-59335.jpg?semt=ais_hybrid&w=740"
-              alt="Developer 1"
-              className="developer-image"
-            />
-            <h3>Developer 1</h3>
-            <p>5+ years of experience in full-stack development.</p>
-          </div>
-          <div className="developer-box">
-            <img
-              src="https://facultyimages.iba-suk.edu.pk/INS-0515.jpg"
-              alt="Developer 1"
-              className="developer-image"
-            />
-            <h3>Instructor </h3>
-            <p>5+ years of experience in full-stack development.</p>
-          </div>
-          <div className="developer-box">
-            <img
-              src="https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL3BsYXlcLzBiN2Y0ZTliLWY1OWMtNDAyNC05ZjA2LWIzZGMxMjg1MGFiNy0xOTIwLTEwODAuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo4Mjh9fX0="
-              alt="Developer 2"
-              className="developer-image"
-            />
-            <h3>Developer 2</h3>
-            <p>
-              3+ years of experience in UI/UX design and front-end development.
-            </p>
-          </div>
-        </div>
+      {/* Call to Action */}
+      <div className="cta-section">
+        <h2>Ready to Make a Difference?</h2>
+        <p>Share your experience and help your country climb the satisfaction ranks!</p>
+        <button className="cta-btn">Take a Survey</button>
       </div>
 
       {/* Statistics Section */}
       <div className="stats-section">
-        <h2>Statistics</h2>
+        <h2>Platform Statistics</h2>
         <div className="stats-container">
           <div className="stat">
             <div className="circle">10K+</div>
@@ -239,10 +241,9 @@ if (state.user) {
             <div className="circle">100+</div>
             <p>Categories</p>
           </div>
-
           <div className="stat">
             <div className="circle">5K+</div>
-            <p>Total Surveyes</p>
+            <p>Total Surveys</p>
           </div>
           <div className="stat">
             <div className="circle">500+</div>
@@ -250,6 +251,13 @@ if (state.user) {
           </div>
         </div>
       </div>
+
+      {/* Motivational Quote */}
+      <div className="quoteSection">
+        <blockquote>
+          "Every voice counts. See how your country is performing and inspire positive change!"
+        </blockquote>
+      </div>
     </div>
-  )
+  );
 }

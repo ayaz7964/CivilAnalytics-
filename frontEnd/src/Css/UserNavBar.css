@@ -38,6 +38,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  text-decoration: none;
 }
 
 .navbar-links li a {
@@ -128,4 +129,65 @@
 .navbar-logout:hover {
   background: #ffd600;
   color: #2d2d2d;
+}
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1.5rem;
+}
+
+.navbar-avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #ffd600 60%, #5b2be7 100%);
+  color: #222;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+  border: 2.5px solid #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: box-shadow 0.2s;
+}
+
+.navbar-avatar:hover {
+  box-shadow: 0 4px 16px rgba(91, 43, 231, 0.18);
+}
+
+.navbar-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navbar-username {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+
+.navbar-logout {
+  background: transparent;
+  border: 1.5px solid #ffd600;
+  color: #ffd600;
+  padding: 0.2rem 1.1rem;
+  border-radius: 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 2px;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.navbar-logout:hover {
+  background: #ffd600;
+  color: #2d2d2d;
+  border: 1.5px solid #fff;
 }

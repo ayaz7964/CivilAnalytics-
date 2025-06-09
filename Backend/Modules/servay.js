@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const surveySchema = new Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
+ username : {
+  type: String,
+  required: true,
+ } , 
+
   country: {
     type: String,
     required: true

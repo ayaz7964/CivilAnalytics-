@@ -51,6 +51,7 @@
   position: relative;
   transition: color 0.2s;
   padding: 4px 0;
+  text-decoration: none;
 }
 
 .NavBar-Link::after {
