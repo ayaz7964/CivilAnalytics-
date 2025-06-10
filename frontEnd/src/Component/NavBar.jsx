@@ -13,7 +13,7 @@ export default function NavBar() {
       </div>
       <ul className="NavBar-Links">
         <li className="NavBar-Link"><Link to = '/home' className='NavBar-Link'>Home</Link></li>
-        <li className="NavBar-Link"><Link to = 'LeaderBord'className="NavBar-Link" >LeaderBord</Link></li>
+        <li className="NavBar-Link"><Link to = 'LeaderBord'className="NavBar-Link" >LeaderBoard</Link></li>
         <li className="NavBar-Link"> <Link to = '/about' className="NavBar-Link" >About</Link></li>
         <li className="NavBar-Link"> <Link to =  '/contact' className="NavBar-Link" >Contact</Link></li>
       </ul>

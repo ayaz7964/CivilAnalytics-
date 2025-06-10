@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Css/Home.css';
+import StatsSection from './StatsSection';
 
 const satisfiedCountries = [
   { name: "Pakistan", image: "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg" },
@@ -226,7 +227,10 @@ export default function Home() {
       </div>
 
       {/* Statistics Section */}
-      <div className="stats-section">
+
+      <StatsSection/>
+      
+      {/* <div className="stats-section">
         <h2>Platform Statistics</h2>
         <div className="stats-container">
           <div className="stat">
@@ -250,7 +254,7 @@ export default function Home() {
             <p>Team Members</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Motivational Quote */}
       <div className="quoteSection">
