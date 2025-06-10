@@ -102,7 +102,9 @@ function formatCountdown(seconds) {
 
 export default function Survey() {
   const { state } = useUser();
-  const user = state?.user;
+  const userObj = state?.user; // FIX: get the full user object
+  const [username, setUsername] = useState("");
+  const [country, setCountry] = useState("");
   const [step, setStep] = useState(-1); // -1 = info, 0 = first domain
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -110,9 +112,28 @@ export default function Survey() {
   const [popup, setPopup] = useState(""); // For error/info popups
   const [nextAllowedDate, setNextAllowedDate] = useState(null);
   const [countdown, setCountdown] = useState(null);
+  const [missingIdx, setMissingIdx] = useState(null);
   const countdownInterval = useRef(null);
 
-  // Pre-fill answers object
+  // Fetch profile and set username/country
+  useEffect(() => {
+    if (!userObj) return;
+    setUsername(userObj.username);
+    async function fetchProfile() {
+      try {
+        const res = await fetch(`/api/profile?username=${userObj.username}`);
+        if (res.ok) {
+          const data = await res.json();
+          setCountry(data.country || "");
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+    fetchProfile();
+  }, [userObj]);
+
+  // Pre-fill answers object (only on mount)
   useEffect(() => {
     if (Object.keys(answers).length === 0) {
       const initial = {};
@@ -121,38 +142,30 @@ export default function Survey() {
       });
       setAnswers(initial);
     }
-  }, [answers]);
+    // eslint-disable-next-line
+  }, []);
 
-  // On mount: check if user can submit survey
+  // On mount: check if user has already submitted a survey
   useEffect(() => {
-    if (!user) return;
+    if (!username || !country) return;
     async function checkSurvey() {
       try {
-        // Dummy scores for check
-        const dummyScores = {};
-        DOMAINS.forEach((d) => (dummyScores[d.key] = 1));
-        const res = await fetch("/api/survey", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: user.username,
-            country: user.country || "",
-            scores: dummyScores,
-            totalScore: 5,
-          }),
-        });
-        if (!res.ok) {
+        const res = await fetch(
+          `/api/survey?username=${username}&country=${country}`
+        );
+        if (res.ok) {
           const data = await res.json();
-          if (data.nextAllowed) {
-            setNextAllowedDate(data.nextAllowed);
-            const seconds =
-              Math.floor(
-                (new Date(data.nextAllowed).getTime() - Date.now()) / 1000
-              ) + 1;
-            setCountdown(seconds > 0 ? seconds : 0);
-            setPopup(
-              "You have already submitted a survey recently. You can submit again after the countdown."
-            );
+          if (data && data.createdAt) {
+            const created = new Date(data.createdAt);
+            const nextAllowed = new Date(created.getTime() + 30 * 24 * 60 * 60 * 1000);
+            if (nextAllowed > new Date()) {
+              setNextAllowedDate(nextAllowed);
+              const seconds = Math.floor((nextAllowed.getTime() - Date.now()) / 1000) + 1;
+              setCountdown(seconds > 0 ? seconds : 0);
+              setPopup(
+                "You have already submitted a survey recently. You can submit again after the countdown."
+              );
+            }
           }
         }
       } catch (e) {
@@ -160,8 +173,7 @@ export default function Survey() {
       }
     }
     checkSurvey();
-    // eslint-disable-next-line
-  }, [user]);
+  }, [username, country]);
 
   // Countdown timer logic
   useEffect(() => {
@@ -191,32 +203,44 @@ export default function Survey() {
       ...prev,
       [domainKey]: prev[domainKey].map((v, i) => (i === qIdx ? value : v)),
     }));
+    if (missingIdx === qIdx) setMissingIdx(null);
   };
 
   const handleNext = () => {
     const currentDomain = DOMAINS[step];
     const missing = answers[currentDomain.key].findIndex((v) => v === null);
     if (missing !== -1) {
+      setMissingIdx(missing);
       setPopup(
         `You missed question #${missing + 1} in "${currentDomain.label}". Please answer all questions before continuing.`
       );
       return;
     }
+    setMissingIdx(null);
+    setPopup(""); // Clear popup if any
     setStep((s) => s + 1);
   };
 
-  const handlePrev = () => setStep((s) => s - 1);
+  const handlePrev = () => {
+    setMissingIdx(null);
+    setPopup(""); // Clear popup if any
+    setStep((s) => s - 1);
+  };
 
   const handleSubmit = async () => {
     const currentDomain = DOMAINS[step];
     const missing = answers[currentDomain.key].findIndex((v) => v === null);
     if (missing !== -1) {
+      setMissingIdx(missing);
       setPopup(
         `You missed question #${missing + 1} in "${currentDomain.label}". Please answer all questions before submitting.`
       );
       return;
     }
+    setMissingIdx(null);
+    setPopup(""); // Clear popup if any
     setSubmitting(true);
+
     // Calculate scores
     const scores = {};
     let totalScore = 0;
@@ -226,44 +250,50 @@ export default function Survey() {
       totalScore += sum;
     });
 
-    // Save to backend
+    // Save to backend (survey)
     try {
       const res = await fetch("/api/survey", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: user.username,
-          country: user.country || "",
+          username,
+          country,
           scores,
           totalScore,
         }),
       });
       if (!res.ok) {
         const data = await res.json();
-        if (data.error && data.error.includes("30 days")) {
-          if (data.nextAllowed) {
-            setNextAllowedDate(data.nextAllowed);
-            const seconds =
-              Math.floor(
-                (new Date(data.nextAllowed).getTime() - Date.now()) / 1000
-              ) + 1;
-            setCountdown(seconds > 0 ? seconds : 0);
-            setPopup(
-              `You have already submitted a survey recently. You can submit again after: ${new Date(
-                data.nextAllowed
-              ).toLocaleString()}`
-            );
-          } else {
-            setPopup(
-              "You have already submitted a survey recently. You can submit again after 30 days."
-            );
-          }
+        if (data.nextAllowed) {
+          setNextAllowedDate(data.nextAllowed);
+          const seconds =
+            Math.floor(
+              (new Date(data.nextAllowed).getTime() - Date.now()) / 1000
+            ) + 1;
+          setCountdown(seconds > 0 ? seconds : 0);
+          setPopup(
+            `You have already submitted a survey recently. You can submit again after: ${new Date(
+              data.nextAllowed
+            ).toLocaleString()}`
+          );
         } else {
           setPopup(data.error || "Failed to submit survey.");
         }
         setSubmitting(false);
         return;
       }
+
+      // Update country aggregate
+      await fetch("/api/countries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          country,
+          scores,
+          totalScore,
+        }),
+      });
+
       setSubmitted(true);
     } catch (e) {
       setPopup("Failed to submit survey. Please try again.");
@@ -291,7 +321,7 @@ export default function Survey() {
   }));
   const totalScore = domainScores.reduce((a, b) => a + b.score, 0);
 
-  if (!user)
+  if (!userObj)
     return (
       <div className="survey-tab-container">
         <div className="survey-info-card">Please log in to take the survey.</div>
@@ -366,6 +396,11 @@ export default function Survey() {
         <div className="survey-info-card animate-fadein">
           <h2>Welcome to the National Quality of Life Survey</h2>
           <p>
+            <span className="font-semibold">User:</span> <span className="text-blue-600">{username}</span>
+            <br />
+            <span className="font-semibold">Country:</span> <span className="text-green-600">{country}</span>
+          </p>
+          <p>
             This professional survey helps us assess satisfaction across key areas of life in your country.
             <br />
             <strong>Instructions:</strong>
@@ -419,8 +454,8 @@ export default function Survey() {
               {DOMAINS[step].questions.map((q, idx) => (
                 <div
                   className={`survey-question animate-fadein ${
-                    answers[DOMAINS[step].key][idx] === null && popup
-                      ? "survey-question-missing"
+                    answers[DOMAINS[step].key][idx] === null && missingIdx === idx
+                      ? "border-2 border-red-500 bg-red-50 rounded-md"
                       : ""
                   }`}
                   key={q}
@@ -452,6 +487,11 @@ export default function Survey() {
                       </label>
                     ))}
                   </div>
+                  {answers[DOMAINS[step].key][idx] === null && missingIdx === idx && (
+                    <div className="text-red-600 text-sm mt-1">
+                      Please answer question #{idx + 1}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

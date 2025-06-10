@@ -182,3 +182,9 @@
 .animate-slidein {
   animation: slidein 0.7s;
 }
+/* Add to Survey.css if not using Tailwind */
+.survey-question-missing {
+  border: 2px solid #ef4444;
+  background: #fef2f2;
+  border-radius: 0.375rem;
+}
