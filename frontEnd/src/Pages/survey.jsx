@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect, useRef } from "react";
 import { useUser } from "../User/UserContext";
 import "../Css/Survey.css";
@@ -102,14 +104,14 @@ function formatCountdown(seconds) {
 
 export default function Survey() {
   const { state } = useUser();
-  const userObj = state?.user; // FIX: get the full user object
+  const userObj = state?.user;
   const [username, setUsername] = useState("");
   const [country, setCountry] = useState("");
-  const [step, setStep] = useState(-1); // -1 = info, 0 = first domain
+  const [step, setStep] = useState(-1);
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [popup, setPopup] = useState(""); // For error/info popups
+  const [popup, setPopup] = useState("");
   const [nextAllowedDate, setNextAllowedDate] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const [missingIdx, setMissingIdx] = useState(null);
@@ -117,21 +119,28 @@ export default function Survey() {
 
   // Fetch profile and set username/country
   useEffect(() => {
-    if (!userObj) return;
-    setUsername(userObj.username);
     async function fetchProfile() {
       try {
-        const res = await fetch(`/api/profile?username=${userObj.username}`);
-        if (res.ok) {
-          const data = await res.json();
-          setCountry(data.country || "");
+        const res = await fetch(`/api/profile/username/${state.user.username}`);
+        if (!res.ok) {
+          console.log("Failed to load user profile. Please try again.");
+          return;
         }
-      } catch (e) {
-        // ignore
+        const data = await res.json();
+        if (data && data.country) {
+          setUsername(state.user.username);
+          setCountry(data.country);
+        } else {
+          console.log("Failed to load user profile. Please try again.");
+        }
+      } catch (error) {
+        console.log("Failed to load user profile. Please try again.");
       }
     }
-    fetchProfile();
-  }, [userObj]);
+    if (state.user?.username) {
+      fetchProfile();
+    }
+  }, [userObj, state.user?.username]);
 
   // Pre-fill answers object (only on mount)
   useEffect(() => {
@@ -162,9 +171,6 @@ export default function Survey() {
               setNextAllowedDate(nextAllowed);
               const seconds = Math.floor((nextAllowed.getTime() - Date.now()) / 1000) + 1;
               setCountdown(seconds > 0 ? seconds : 0);
-              setPopup(
-                "You have already submitted a survey recently. You can submit again after the countdown."
-              );
             }
           }
         }
@@ -217,28 +223,19 @@ export default function Survey() {
       return;
     }
     setMissingIdx(null);
-    setPopup(""); // Clear popup if any
+    setPopup("");
     setStep((s) => s + 1);
   };
 
   const handlePrev = () => {
     setMissingIdx(null);
-    setPopup(""); // Clear popup if any
+    setPopup("");
     setStep((s) => s - 1);
   };
 
   const handleSubmit = async () => {
-    const currentDomain = DOMAINS[step];
-    const missing = answers[currentDomain.key].findIndex((v) => v === null);
-    if (missing !== -1) {
-      setMissingIdx(missing);
-      setPopup(
-        `You missed question #${missing + 1} in "${currentDomain.label}". Please answer all questions before submitting.`
-      );
-      return;
-    }
     setMissingIdx(null);
-    setPopup(""); // Clear popup if any
+    setPopup("");
     setSubmitting(true);
 
     // Calculate scores
@@ -250,7 +247,6 @@ export default function Survey() {
       totalScore += sum;
     });
 
-    // Save to backend (survey)
     try {
       const res = await fetch("/api/survey", {
         method: "POST",
@@ -282,18 +278,6 @@ export default function Survey() {
         setSubmitting(false);
         return;
       }
-
-      // Update country aggregate
-      await fetch("/api/countries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          country,
-          scores,
-          totalScore,
-        }),
-      });
-
       setSubmitted(true);
     } catch (e) {
       setPopup("Failed to submit survey. Please try again.");
@@ -328,6 +312,23 @@ export default function Survey() {
       </div>
     );
 
+  // Always show countdown screen if countdown is active and survey not submitted
+  if (countdown !== null && countdown > 0 && !submitted)
+    return (
+      <div className="survey-tab-container">
+        <div className="survey-info-card animate-fadein">
+          <h2>Survey Already Submitted</h2>
+          <p>
+            You can submit the survey again after:
+            <br />
+            <span style={{ color: "red", fontWeight: "bold", fontSize: 22 }}>
+              {formatCountdown(countdown)}
+            </span>
+          </p>
+        </div>
+      </div>
+    );
+
   if (submitted)
     return (
       <div className="survey-tab-container">
@@ -357,22 +358,7 @@ export default function Survey() {
       </div>
     );
 
-  if (countdown !== null && countdown > 0)
-    return (
-      <div className="survey-tab-container">
-        <div className="survey-info-card animate-fadein">
-          <h2>Survey Already Submitted</h2>
-          <p>
-            You can submit the survey again after:
-            <br />
-            <span style={{ color: "red", fontWeight: "bold", fontSize: 22 }}>
-              {formatCountdown(countdown)}
-            </span>
-          </p>
-        </div>
-      </div>
-    );
-
+  // Welcome screen and survey form
   return (
     <div className="survey-tab-container">
       {/* Popup for errors or info */}
@@ -417,9 +403,19 @@ export default function Survey() {
               </li>
             </ul>
           </p>
-          <button className="survey-btn survey-btn-primary" onClick={() => setStep(0)}>
-            Start Survey
-          </button>
+          {/* Only show Start Survey button if countdown is not active */}
+          {countdown === null || countdown <= 0 ? (
+            <button
+              className="survey-btn survey-btn-primary"
+              onClick={() => setStep(0)}
+            >
+              Start Survey
+            </button>
+          ) : (
+            <div style={{ color: "red", fontWeight: "bold", fontSize: 18, marginTop: 16 }}>
+              You can start the survey again after: {formatCountdown(countdown)}
+            </div>
+          )}
         </div>
       ) : (
         <div className="survey-form-card animate-slidein">
@@ -483,7 +479,7 @@ export default function Survey() {
                           }
                           required
                         />
-                        {opt.label}
+                        {opt.label} 
                       </label>
                     ))}
                   </div>
@@ -509,9 +505,7 @@ export default function Survey() {
               <button
                 type="submit"
                 className="survey-btn survey-btn-primary"
-                disabled={
-                  answers[DOMAINS[step].key].some((v) => v === null) || submitting
-                }
+                disabled={submitting}
               >
                 {step === DOMAINS.length - 1 ? "Submit Survey" : "Next"}
               </button>
@@ -522,3 +516,6 @@ export default function Survey() {
     </div>
   );
 }
+
+
+

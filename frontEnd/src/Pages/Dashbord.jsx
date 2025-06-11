@@ -1,7 +1,9 @@
 import React from 'react';
 import '../Css/Dashboard.css'; // Make sure this path is correct
+import { useUser } from '../User/UserContext'; // Adjust the import path as necessary
 
 export default function Dashbord() {
+  const {state } = useUser();
   // Example data (replace with real data from your backend)
   const user = {
     name: "Alex",
@@ -23,7 +25,7 @@ export default function Dashbord() {
     ],
     surveyGoal: 20, // For progress bar
   };
-
+  console.log(state.user.username ,"state.user.username in dashbord");
   const progressPercent = Math.min(
     Math.round((user.surveysCompleted / user.surveyGoal) * 100),
     100
