@@ -16,21 +16,7 @@ routes.get('/', async (req, res) => {
     }
 })
 
-routes.get('/:id', async (req, res) => {
-    const { id } = req.params;  
-    if (!mongose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such country found' });
-    }
-    try {
-        const country = await countires.findById(id);
-        if (!country) {
-            return res.status(404).json({ error: 'No such country found or exists' });
-        }
-        res.status(200).json(country);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch country' });
-    }
-})
+
 routes.post('/', async (req, res) => {
     const { CountryName, TotalUser, TotalScore, Healthcare, Education, Employment, Transportation, PublicSafety } = req.body;
 
@@ -330,5 +316,43 @@ routes.post('/survey', async (req, res) => {
 });
 
 
+
+// get survey data for a user by username and country
+routes.get('/survey', async (req, res) => {
+    const { username, country } = req.query;
+
+    if (!username || !country) {
+        return res.status(400).json({ error: "Username and country are required." });
+    }
+
+    try {
+        // FIX: filter by username and country
+        const survey = await Survey.findOne({ username, country });
+        if (!survey) {
+            return res.status(404).json({ error: "No survey found for this user in the specified country." });
+        }
+        res.status(200).json(survey);
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+
+routes.get('/:id', async (req, res) => {
+    const { id } = req.params;  
+    if (!mongose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such country found' });
+    }
+    try {
+        const country = await countires.findById(id);
+        if (!country) {
+            return res.status(404).json({ error: 'No such country found or exists' });
+        }
+        res.status(200).json(country);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch country' });
+    }
+})
+// ...existing code...
 module.exports = routes ;
 
