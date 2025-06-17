@@ -123,18 +123,21 @@ export default function Survey() {
       try {
         const res = await fetch(`/api/profile/username/${state.user.username}`);
         if (!res.ok) {
-          console.log("Failed to load user profile. Please try again.");
-          return;
+          setUsername('Null')
+          setCountry('Null')
+          console.log("Failed to load user profile. Please try again. N/A");
+
+          return 
         }
         const data = await res.json();
         if (data && data.country) {
           setUsername(state.user.username);
           setCountry(data.country);
         } else {
-          console.log("Failed to load user profile. Please try again.");
+          console.log("Failed to load user profile. Please try again. Test ");
         }
       } catch (error) {
-        console.log("Failed to load user profile. Please try again.");
+        console.log("Failed to load user profile. Please try again. AH");
       }
     }
     if (state.user?.username) {
@@ -304,6 +307,14 @@ export default function Survey() {
     score: answers[d.key]?.reduce((a, b) => a + (b ?? 0), 0) ?? 0,
   }));
   const totalScore = domainScores.reduce((a, b) => a + b.score, 0);
+
+  if(username == 'Null' && country == 'Null'){
+    return <div className="survey-tab-container">
+        <div className="survey-info-card">Please Add Profile Details First  , Then Survey Will be Started   .</div>
+        
+
+      </div>
+  }
 
   if (!userObj)
     return (

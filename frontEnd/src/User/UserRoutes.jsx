@@ -17,7 +17,7 @@ export default function UserRoutes() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/survey" element={<Survey />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/settings" element={<Settings />} />
+        {/* <Route path="/settings" element={<Settings />} /> */}
         {/* Redirect /home to /dashboard or any default user page */}
         <Route path="/home" element={<Navigate to="/dashboard" replace />} />
         {/* Catch-all for unknown routes */}

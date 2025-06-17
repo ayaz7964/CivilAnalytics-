@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Css/Dashboard.css";
 import { useUser } from "../User/UserContext";
+import { Link } from "react-router-dom";
 
 export default function Dashbord() {
   const { state } = useUser();
@@ -133,8 +134,9 @@ export default function Dashbord() {
       <div className="mainContent">
         <div className="leftPanel">
           <h3>Quick Actions</h3>
-          <button className="surveyButton">Take New Survey</button>
-          <button className="surveyButton">View My Results</button>
+          <p>Take a new survey to share your feedback and help improve services.</p>
+          <Link to="/survey" className="surveyButton">Take New Survey</Link>
+         
         </div>
         <div className="centerPanel">
           <h3>Satisfaction by Field</h3>

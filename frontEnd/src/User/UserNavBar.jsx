@@ -22,7 +22,7 @@ export default function UserNavBar() {
       <ul className="navbar-links">
         <li><Link to="/dashboard">Dashboard</Link></li>
         <li><Link to="/profile">Profile</Link></li>
-        <li><Link to="/settings">Setting</Link></li>
+        {/* <li><Link to="/settings">Setting</Link></li> */}
         <li><Link to="/survey">survey</Link></li>
       </ul>
       {/* <div className="navbar-search">
