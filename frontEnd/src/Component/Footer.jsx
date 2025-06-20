@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="FooterPro-Brand">
             <div className="FooterPro-Logo">
               <span className="FooterPro-LogoIcon">🏛️</span>
-              <span className="FooterPro-LogoText">CiviAnalytics</span>
+              <span className="FooterPro-LogoText">SatisNation</span>
             </div>
             
             <p className="FooterPro-Description">
@@ -21,9 +21,9 @@ export default function Footer() {
             <div className="FooterPro-Contact">
               <h4 className="FooterPro-ContactTitle">Get in Touch</h4>
               <div className="FooterPro-ContactInfo">
-                info@civianalytics.org<br />
-                +1 (234) 567-8901<br />
-                Mon - Fri, 9:00 AM - 6:00 PM EST
+                info@satisnation.org<br />
+                +92 3149972398<br />
+                Mon - Fri, 9:00 AM - 6:00 PM PST
               </div>
             </div>
             
@@ -123,7 +123,7 @@ export default function Footer() {
         
         <div className="FooterPro-Bottom">
           <div className="FooterPro-Copyright">
-            <span>&copy; {new Date().getFullYear()} CiviAnalytics. All rights reserved.</span>
+            <span>&copy; {new Date().getFullYear()} SatisNation. All rights reserved.</span>
           </div>
           <div className="FooterPro-Legal">
             <a href="#" className="FooterPro-LegalLink">Privacy Policy</a>
