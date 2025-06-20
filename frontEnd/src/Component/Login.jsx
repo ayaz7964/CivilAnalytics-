@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../User/UserContext";
-import "../Css/SignUp.css"; // Reuse the same CSS as SignUp
+import "../Css/Login.css";
 
 export default function Login() {
   const { dispatch } = useUser();
-  // Use 'identifier' instead of 'email' to allow email or username
   const [form, setForm] = useState({ identifier: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // Add showPassword state
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    document.title = "Login";
+    document.title = "Login - Your App Name";
   }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    // Clear error when user starts typing
+    if (error) setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
+    
     try {
       const res = await fetch("/api/login", {
         method: "POST",
@@ -29,37 +31,37 @@ export default function Login() {
         body: JSON.stringify(form),
       });
       const data = await res.json();
+      
       if (res.ok && data.user) {
-        // Save both email and username in context for later use
         dispatch({
-  type: "LOGIN",
-  payload: {
-    email: data.user.email,
-    username: data.user.username,
-  },
-});
-console.log("User after login:", { email: data.user.email, username: data.user.username });
-        // window.location.href = "/home"; // or use navigate if using react-router
-        // window.location.href = "/dashboard";
+          type: "LOGIN",
+          payload: {
+            email: data.user.email,
+            username: data.user.username,
+          },
+        });
+        // Redirect to dashboard or homepage
+        window.location.href = "/dashboard";
       } else {
-        setError(data.error || "Invalid credentials");
+        setError(data.error || "Invalid credentials. Please try again.");
       }
-    } catch {
-      setError("Server error. Please try again.");
+    } catch (err) {
+      setError("Unable to connect to server. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
-    <div className="signup-bg">
-      <div className="signup-card">
-        <div className="signup-image-section">
-          <img src="/login-illustration.jpg" alt="Login" className="signup-image" />
-        </div>
-        <div className="signup-form-section">
-          <h1>Login</h1>
-          <form onSubmit={handleSubmit} className="signup-form">
-            <div className="form-group">
+    <div className="login-wrapper">
+      <div className="login-card">
+          <div className="login-header">
+            <h2>Welcome Back! 👋</h2>
+            <p>Sign in to your account to continue</p>
+          </div>
+          
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="input-group">
               <label htmlFor="identifier">Email or Username</label>
               <input
                 type="text"
@@ -68,40 +70,77 @@ console.log("User after login:", { email: data.user.email, username: data.user.u
                 value={form.identifier}
                 onChange={handleChange}
                 required
+                placeholder="Enter your email or username"
                 autoComplete="username"
+                disabled={loading}
               />
             </div>
-            <div className="form-group">
+            
+            <div className="input-group">
               <label htmlFor="password">Password</label>
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                id="password"
-                value={form.password}
-                onChange={handleChange}
-                required
-                autoComplete="current-password"
-              />
-              <div style={{ marginTop: "0.5em" }}>
+              <div className="password-input-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter your password"
+                  autoComplete="current-password"
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  disabled={loading}
+                >
+                  {showPassword ? "👁️" : "👁️‍🗨️"}
+                </button>
+              </div>
+              <div className="show-password">
                 <input
                   type="checkbox"
                   id="showPassword"
                   checked={showPassword}
-                  onChange={() => setShowPassword((prev) => !prev)}
+                  onChange={() => setShowPassword(!showPassword)}
+                  disabled={loading}
                 />
-                <label htmlFor="showPassword" style={{ marginLeft: "0.5em" }}>
-                  Show Password
-                </label>
+                <label htmlFor="showPassword">Show Password</label>
               </div>
             </div>
-            {error && <div className="server-error">{error}</div>}
-            <button type="submit" className="signup-button" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
-            </button>
+            
+            {error && (
+              <div className="error-msg" role="alert">
+                <span className="error-icon">⚠️</span>
+                {error}
+              </div>
+            )}
+            
+            <div className="login-actions">
+              <button type="submit" className="login-btn" disabled={loading}>
+                {loading ? (
+                  <>
+                    <span className="loading-spinner"></span>
+                    Signing In...
+                  </>
+                ) : (
+                  "Sign In"
+                )}
+              </button>
+              
+              <div className="forgot-password">
+                <a href="/forgot-password">Forgot your password?</a>
+              </div>
+            </div>
           </form>
-          <p className="login-link">
-            Don't have an account? <a href="/signup">Sign Up</a>
-          </p>
+          
+          <div className="login-footer">
+            <p className="signup-redirect">
+              Don't have an account? <a href="/signup">Create Account</a>
+            </p>
         </div>
       </div>
     </div>
