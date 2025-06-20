@@ -1,35 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Css/NavBar.css'; 
-import { Link } from 'react-router-dom'; // If you are using React Router for navigation
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className="NavBar">
       <div className="NavBar-LogoSection">
-        <Link to= '/' className='NavBar-LogoSection' >
-        <span className="NavBar-Logo-Icon" aria-label="CricAnalytics Logo">📊</span>
-        <span className="NavBar-Logo-Text">CricAnalytics</span>
+        <Link to='/' className='NavBar-LogoSection-Link'>
+          <span className="NavBar-Logo-Icon" aria-label="SatisNation Logo">🏛️</span>
+          <span className="NavBar-Logo-Text">SatisNation</span>
         </Link>
       </div>
-      <ul className="NavBar-Links">
-        <li className="NavBar-Link"><Link to = '/home' className='NavBar-Link'>Home</Link></li>
-        <li className="NavBar-Link"><Link to = 'LeaderBord'className="NavBar-Link" >LeaderBoard</Link></li>
-        <li className="NavBar-Link"> <Link to = '/about' className="NavBar-Link" >About</Link></li>
-        <li className="NavBar-Link"> <Link to =  '/contact' className="NavBar-Link" >Contact</Link></li>
+
+      {/* Mobile Menu Toggle */}
+      <div className="NavBar-MenuToggle" onClick={toggleMenu}>
+        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? 'active' : ''}`}></span>
+        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? 'active' : ''}`}></span>
+        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? 'active' : ''}`}></span>
+      </div>
+
+      <ul className={`NavBar-Links ${isMenuOpen ? 'active' : ''}`}>
+        <li className="NavBar-Link-Item">
+          <Link to='/home' className='NavBar-Link' onClick={() => setIsMenuOpen(false)}>
+            Home
+          </Link>
+        </li>
+        <li className="NavBar-Link-Item">
+          <Link to='/leaderboard' className="NavBar-Link" onClick={() => setIsMenuOpen(false)}>
+            LeaderBoard
+          </Link>
+        </li>
+        <li className="NavBar-Link-Item">
+          <Link to='/about' className="NavBar-Link" onClick={() => setIsMenuOpen(false)}>
+            About
+          </Link>
+        </li>
+        <li className="NavBar-Link-Item">
+          <Link to='/contact' className="NavBar-Link" onClick={() => setIsMenuOpen(false)}>
+            Contact
+          </Link>
+        </li>
       </ul>
-      {/* <div className="NavBar-SearchSection">
-        <input
-          className="NavBar-SearchInput"
-          type="text"
-          placeholder="Search surveys, topics..."
-        />
-        <button className="NavBar-SearchButton" aria-label="Search">🔍</button>
-      </div> */}
+
       <div className="NavBar-ProfileSection">
-        {/* <span className="NavBar-Profile-Icon" aria-label="User">👤</span>
-        <span className="NavBar-Profile-Name">Username</span> */}
-        <p><Link to= "/login" className="NavBar-LoginBtn" >Login</Link></p>
-        <p ><Link to = '/signup' className="NavBar-SignUpBtn">Sign Up</Link></p>
+        <Link to="/login" className="NavBar-LoginBtn">
+          Login
+        </Link>
+        <Link to='/signup' className="NavBar-SignUpBtn">
+          Sign Up
+        </Link>
       </div>
     </nav>
   );
