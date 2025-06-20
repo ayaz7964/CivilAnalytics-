@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../User/UserContext";
 import "../Css/Login.css";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const { dispatch } = useUser();
@@ -39,9 +40,10 @@ export default function Login() {
             email: data.user.email,
             username: data.user.username,
           },
-        });
+        }
+      );
         // Redirect to dashboard or homepage
-        window.location.href = "/dashboard";
+        // window.location.href = "/dashboard";
       } else {
         setError(data.error || "Invalid credentials. Please try again.");
       }
@@ -139,7 +141,9 @@ export default function Login() {
           
           <div className="login-footer">
             <p className="signup-redirect">
-              Don't have an account? <a href="/signup">Create Account</a>
+              {/* Don't have an account? <a href="/signup">Create Account</a>
+               */}
+              Don't have an account? <Link to = '/signup'>Sign Up</Link>
             </p>
         </div>
       </div>
