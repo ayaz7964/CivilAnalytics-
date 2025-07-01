@@ -105,7 +105,7 @@ export default function Home() {
               <span className="country-score">{countrySatisfaction(featured)}%</span>
             </div>
             <div className="featured-country-users">
-              <span>👥 {featured.TotalUser} users</span>
+              <span>👥 {featured.TotalUser} People</span>
             </div>
           </div>
         </div>
