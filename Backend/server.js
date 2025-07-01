@@ -12,6 +12,14 @@ mongoose.connect(dbURL).then(()=>{
     console.log(err)
 })
 
+app.use(cors(
+    {
+origin:['https://satisnation.vercel.app'],
+methods:["POST","GET","PUT","DELETE"],
+credentials:true
+    }
+))
+
 // Middleware to parse JSON bodies
 app.use(express.json()); 
 
