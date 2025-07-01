@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "https://satisnation-api.vercel.app/"
-    }
-  ]
-}
