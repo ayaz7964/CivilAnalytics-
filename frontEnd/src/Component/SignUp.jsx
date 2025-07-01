@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "../Css/Login.css"; // Reusing login styles
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [serverError, setServerError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Sign Up - Your App Name";
@@ -45,7 +46,8 @@ export default function SignUp() {
           setServerError(data?.error || "Signup failed.");
         } else if (data.success) {
           
-          window.location.href = "/login";
+          // alert("Signup successful! Redirecting to login...");
+           navigate("/login");
           <Link to="/login" />;
         } else {
           setServerError("Something went wrong.");
