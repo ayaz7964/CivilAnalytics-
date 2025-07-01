@@ -11,6 +11,10 @@ mongoose.connect(dbURL).then(()=>{
 }).catch((err)=>{
     console.log(err)
 })
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://satisnation.vercel.app'
+}));
 
 
 // Middleware to parse JSON bodies
