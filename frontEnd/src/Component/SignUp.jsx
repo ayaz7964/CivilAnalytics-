@@ -45,7 +45,7 @@ export default function SignUp() {
           setServerError(data?.error || "Signup failed.");
         } else if (data.success) {
           
-          // window.location.href = "/login";
+          window.location.href = "/login";
           <Link to="/login" />;
         } else {
           setServerError("Something went wrong.");
