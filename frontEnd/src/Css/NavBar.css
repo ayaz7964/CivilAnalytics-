@@ -289,3 +289,40 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
+
+/* Remove orange outline for NavBar-Link on focus/active */
+.NavBar-Link:focus,
+.NavBar-Link:active {
+  outline: none;
+}
+
+/* Keep outline for buttons for accessibility */
+.NavBar-LoginBtn:focus,
+.NavBar-SignUpBtn:focus {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+/* Match click (active) effect to hover/focus */
+.NavBar-Link:active {
+  color: #f59e0b;
+}
+
+.NavBar-Link:active::after {
+  width: 100%;
+}
+
+/* Active state for Login and Sign Up buttons */
+.NavBar-LoginBtn.active,
+.NavBar-SignUpBtn.active {
+  background: #f59e0b;
+  color: #0f5562;
+  border: 1.5px solid #f59e0b;
+}
+
+.NavBar-ProfileSection .NavBar-LoginBtn.active,
+.NavBar-ProfileSection .NavBar-SignUpBtn.active {
+  background: #f59e0b !important;
+  color: #0f5562 !important;
+  border: 2px solid #f59e0b !important;
+}

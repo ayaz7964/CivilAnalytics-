@@ -229,7 +229,9 @@ export default function Home() {
 
       {/* Statistics Section */}
 
-      <StatsSection/>
+      <div id="platform-statistics">
+        <StatsSection/>
+      </div>
       
       {/* <div className="stats-section">
         <h2>Platform Statistics</h2>

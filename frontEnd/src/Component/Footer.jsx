@@ -1,6 +1,7 @@
 import React from "react";
 import "../Css/Footer.css";
 import { FaTwitter, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -45,16 +46,16 @@ export default function Footer() {
             <h4 className="FooterPro-ColumnTitle">Quick Links</h4>
             <ul className="FooterPro-LinkList">
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Home</a>
+                <Link to="/home" className="FooterPro-Link">Home</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">About Us</a>
+                <Link to="/leaderboard" className="FooterPro-Link">Leader Board</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Our Mission</a>
+                <Link to="/about" className="FooterPro-Link">About</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Contact</a>
+                <Link to="/contact" className="FooterPro-Link">Contact</Link>
               </li>
             </ul>
           </div>
@@ -64,16 +65,16 @@ export default function Footer() {
             <h4 className="FooterPro-ColumnTitle">Services</h4>
             <ul className="FooterPro-LinkList">
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Global Surveys</a>
+                <Link to="/home" className="FooterPro-Link">Global Surveys</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Country Rankings</a>
+                <Link to="/home" className="FooterPro-Link">Country Rankings</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Data Analytics</a>
+                <Link to="/home" className="FooterPro-Link">Data Analytics</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Research Reports</a>
+                <Link to="/home" className="FooterPro-Link">Research Reports</Link>
               </li>
             </ul>
           </div>
@@ -83,16 +84,16 @@ export default function Footer() {
             <h4 className="FooterPro-ColumnTitle">Resources</h4>
             <ul className="FooterPro-LinkList">
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Documentation</a>
+                <Link to="/home" className="FooterPro-Link">Documentation</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">API Access</a>
+                <Link to="/home" className="FooterPro-Link">API Access</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">Help Center</a>
+                <Link to="/home" className="FooterPro-Link">Help Center</Link>
               </li>
               <li className="FooterPro-LinkItem">
-                <a href="#" className="FooterPro-Link">FAQ</a>
+                <Link to="/home" className="FooterPro-Link">FAQ</Link>
               </li>
             </ul>
           </div>
@@ -126,9 +127,9 @@ export default function Footer() {
             <span>&copy; {new Date().getFullYear()} SatisNation. All rights reserved.</span>
           </div>
           <div className="FooterPro-Legal">
-            <a href="#" className="FooterPro-LegalLink">Privacy Policy</a>
-            <a href="#" className="FooterPro-LegalLink">Terms of Service</a>
-            <a href="#" className="FooterPro-LegalLink">Cookie Policy</a>
+            <Link to="/privacy" className="FooterPro-LegalLink">Privacy Policy</Link>
+            <Link to="/terms" className="FooterPro-LegalLink">Terms of Service</Link>
+            <Link to="/cookies" className="FooterPro-LegalLink">Cookie Policy</Link>
           </div>
         </div>
       </div>

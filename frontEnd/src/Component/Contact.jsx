@@ -11,11 +11,32 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      setError('Please fill in all fields.');
+    // Improved validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!form.name.trim()) {
+      setError('Please enter your name.');
       return;
     }
-    
+    if (form.name.trim().length < 2) {
+      setError('Name must be at least 2 characters.');
+      return;
+    }
+    if (!form.email.trim()) {
+      setError('Please enter your email.');
+      return;
+    }
+    if (!emailRegex.test(form.email.trim())) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    if (!form.message.trim()) {
+      setError('Please enter your message.');
+      return;
+    }
+    if (form.message.trim().length < 10) {
+      setError('Message must be at least 10 characters.');
+      return;
+    }
     setError('');
     setIsSubmitting(true);
     
@@ -26,6 +47,7 @@ export default function Contact() {
       )}`;
       setIsSubmitting(false);
       setSent(true);
+      setForm({ name: '', email: '', message: '' });
     }, 1000);
   };
 
@@ -39,7 +61,7 @@ export default function Contact() {
           </div>
           <h1>
             Contact{' '}
-            <span className="brand-text">CiviAnalytics</span>
+            <span className="brand-text">SatisNation</span>
           </h1>
           <p className="hero-description">
             We'd love to hear from you! Please fill out the form below and our team will get back to you soon.
@@ -144,14 +166,6 @@ export default function Contact() {
               )}
             </button>
           </div>
-        </div>
-
-        {/* Direct Email Link */}
-        <div className="direct-email">
-          <p>Or email us directly:</p>
-          <a href="mailto:ayazhussain4483@gmail.com">
-            ayazhussain4483@gmail.com
-          </a>
         </div>
       </div>
     </div>

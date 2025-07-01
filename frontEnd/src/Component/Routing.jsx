@@ -20,7 +20,7 @@ export default function Routing() {
         <Route path='/about' element = {<About/>} />
         <Route path='/contact' element = {<Contact/>} />
         <Route path="/signup" element={<SingUp/>} />
-        <Route path = '/leaderboard' element={<LeaderBord/>} />
+        <Route path="/leaderboard" element={<LeaderBord />} />
         {/* <Route path="/" element={<h1>Dashboard</h1>} /> */}
     </Routes>
        <Footer/>

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "lucide-react": "^0.525.0",
+    "react-router-hash-link": "^2.4.3"
+  }
+}
