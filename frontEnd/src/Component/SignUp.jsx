@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "../Css/Login.css"; // Reusing login styles
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const [serverError, setServerError] = useState("");
