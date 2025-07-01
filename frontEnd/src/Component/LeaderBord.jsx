@@ -147,7 +147,7 @@ export default function LeaderBord() {
       <div className="cta-section">
         <h2>Want to Improve Your Country's Rank?</h2>
         <p>Participate in surveys and help your country climb the leaderboard!</p>
-        <button className="cta-btn">Take a Survey</button>
+        <Link to = '/login' className="cta-btn">Take a Survey</Link>
       </div>
     </div>
   );

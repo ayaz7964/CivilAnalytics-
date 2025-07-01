@@ -43,8 +43,9 @@ export default function SignUp() {
         if (!res.ok) {
           setServerError(data?.error || "Signup failed.");
         } else if (data.success) {
-          alert("Sign Up successful! Please log in.");
-          window.location.href = "/login";
+          
+          // window.location.href = "/login";
+          <Link to="/login" />;
         } else {
           setServerError("Something went wrong.");
         }
@@ -149,7 +150,7 @@ export default function SignUp() {
 
         <div className="login-footer">
           <p className="signup-redirect">
-            Already have an account? <a href="/login">Log In</a>
+            Already have an account? <Link  to="/login">Log In</Link>
           </p>
         </div>
       </div>

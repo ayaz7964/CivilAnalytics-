@@ -223,7 +223,7 @@ export default function Home() {
       <div className="cta-section">
         <h2>Ready to Make a Difference?</h2>
         <p>Share your experience and help your country climb the satisfaction ranks!</p>
-        <button className="cta-btn">Take a Survey</button>
+        <Link to = '/login'className="cta-btn">Take a Survey</Link>
       </div>
 
       {/* Statistics Section */}
