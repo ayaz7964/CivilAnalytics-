@@ -8,8 +8,8 @@ const dbURL = "mongodb+srv://ayaz:1234@cluster0.65rzobs.mongodb.net/CiviAnalytic
 const cors = require("cors");
 
 app.use(cors({
-  origin: "https://satisnation.vercel.app", // Your frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: 'https://satisnation.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
 
