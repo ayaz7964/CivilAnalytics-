@@ -132,9 +132,9 @@ export default function Login() {
               )}
             </button>
 
-            <div className="forgot-password">
+            {/* <div className="forgot-password">
               <a href="/forgot-password">Forgot your password?</a>
-            </div>
+            </div> */}
           </div>
         </form>
 
