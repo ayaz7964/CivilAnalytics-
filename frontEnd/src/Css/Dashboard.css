@@ -106,7 +106,7 @@ html, body {
 
 /* SatisNation Dashboard Modernized Styles */
 .dashboardContainer {
-  background: #f8fafc;
+  /* background: #f8fafc; */
   padding: 2rem 1rem;
   min-height: 100vh;
   font-family: 'Segoe UI', Arial, sans-serif;

@@ -190,7 +190,7 @@ export default function Profile() {
             <img
               src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
                 profile.fullName || user.username
-              )}&background=1976d2&color=fff&size=128`}
+              )}&background=f59e0b&color=fff&size=128`}
               alt={profile.fullName || user.username}
             />
           </div>
@@ -239,7 +239,7 @@ export default function Profile() {
             <img
               src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
                 user.username
-              )}&background=1976d2&color=fff&size=128`}
+              )}&background=f59e0b&color=fff&size=128`}
               alt={user.username}
             />
           </div>
@@ -414,7 +414,7 @@ export default function Profile() {
         <h3>Need Help?</h3>
         <p>
           For support or questions, contact us at{" "}
-          <a href="mailto:info@civianalytics.com">info@civianalytics.com</a>
+          <a href="mailto:info@civianalytics.com">info@satisnation.com</a>
         </p>
       </div>
     </div>
