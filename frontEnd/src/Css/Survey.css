@@ -1,3 +1,92 @@
+/* Prevent horizontal scroll globally */
+html, body {
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Main containers never overflow */
+.survey-tab-container,
+.survey-info-card,
+.survey-form-card,
+.survey-summary {
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .survey-tab-container {
+    max-width: 98vw;
+    padding: 0 8px;
+  }
+  .survey-info-card, .survey-form-card {
+    padding: 24px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .survey-tab-container {
+    padding: 0 2px;
+  }
+  .survey-info-card, .survey-form-card {
+    padding: 12px 2px;
+    border-radius: 10px;
+  }
+  .survey-summary {
+    padding: 10px 4px 4px 4px;
+    border-radius: 8px;
+  }
+  .survey-question {
+    padding: 10px 0;
+  }
+  .survey-options {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .survey-form-actions {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .survey-btn,
+  .survey-btn-primary,
+  .survey-btn-secondary {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .survey-summary-row {
+    flex-direction: column;
+    gap: 2px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .survey-tab-container {
+    padding: 0 1px;
+  }
+  .survey-info-card, .survey-form-card {
+    padding: 6px 1px;
+  }
+  .survey-summary {
+    padding: 4px 1px 2px 1px;
+  }
+}
+
+/* Prevent any child from causing overflow */
+.survey-tab-container *,
+.survey-info-card *,
+.survey-form-card *,
+.survey-summary * {
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 .survey-tab-container {
   max-width: 700px;
   margin: 40px auto;

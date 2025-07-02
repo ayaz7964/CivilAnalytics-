@@ -59,8 +59,9 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
           
-          {/* Services */}
+ {/* Services */}
           <div className="FooterPro-Column">
             <h4 className="FooterPro-ColumnTitle">Services</h4>
             <ul className="FooterPro-LinkList">
@@ -80,7 +81,7 @@ export default function Footer() {
           </div>
           
           {/* Resources */}
-          <div className="FooterPro-Column">
+          <div className="FooterPro-Column resources">
             <h4 className="FooterPro-ColumnTitle">Resources</h4>
             <ul className="FooterPro-LinkList">
               <li className="FooterPro-LinkItem">
@@ -99,7 +100,7 @@ export default function Footer() {
           </div>
           
           {/* Newsletter */}
-          <div className="FooterPro-Column">
+          <div className="FooterPro-Column newsletter">
             <div className="FooterPro-Newsletter">
               <h4 className="FooterPro-NewsletterTitle">Newsletter</h4>
               <p className="FooterPro-NewsletterDesc">
@@ -119,6 +120,9 @@ export default function Footer() {
             </div>
           </div>
         </div>
+        
+          
+         
         
         <div className="FooterPro-Divider"></div>
         

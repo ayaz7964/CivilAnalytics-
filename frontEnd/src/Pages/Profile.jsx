@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import '../Css/Profile.css';
+import React, { useEffect, useState } from "react";
+import "../Css/Profile.css";
 import { useUser } from "../User/UserContext";
 
 export default function Profile() {
@@ -9,36 +9,116 @@ export default function Profile() {
   const [edit, setEdit] = useState(false);
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(true);
-  const [msg, setMsg] = useState('');
-  const [error, setError] = useState('');
+  const [msg, setMsg] = useState("");
+  const [error, setError] = useState("");
   const [isNew, setIsNew] = useState(false);
 
-const countries = [
-  { name: "Pakistan", image: "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg" },
-  { name: "France", image: "https://cdn.pixabay.com/photo/2017/08/25/20/04/international-2681245_1280.jpg" },
-  { name: "China", image: "https://cdn.pixabay.com/photo/2017/08/29/22/10/germany-2695058_1280.jpg" },
-  { name: "UK", image: "https://cdn.pixabay.com/photo/2017/08/28/18/51/international-2690850_1280.jpg" },
-  { name: "USA", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "India", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Bangladesh", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Iran", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Russia", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Switzerland", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Singapore", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Afghanistan", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "England", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Germany", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Italy", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Spain", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Turkey", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Japan", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "South Korea", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Canada", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-];
+  const countries = [
+    {
+      name: "Pakistan",
+      image:
+        "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg",
+    },
+    {
+      name: "France",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/25/20/04/international-2681245_1280.jpg",
+    },
+    {
+      name: "China",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/22/10/germany-2695058_1280.jpg",
+    },
+    {
+      name: "UK",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/28/18/51/international-2690850_1280.jpg",
+    },
+    {
+      name: "USA",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "India",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Bangladesh",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Iran",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Russia",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Switzerland",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Singapore",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Afghanistan",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "England",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Germany",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Italy",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Spain",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Turkey",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Japan",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "South Korea",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+    {
+      name: "Canada",
+      image:
+        "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg",
+    },
+  ];
 
   // Debug: log user object
   useEffect(() => {
-    console.log('User from context:', user);
+    console.log("User from context:", user);
   }, [user]);
 
   // Fetch profile by username
@@ -53,15 +133,16 @@ const countries = [
     }
     setLoading(true);
     fetch(`/api/profile/username/${user.username}`)
-      .then(async res => {
+      .then(async (res) => {
         if (!res.ok) {
           return null;
         }
         const data = await res.json();
-        if (!data || typeof data !== 'object' || Array.isArray(data)) return null;
+        if (!data || typeof data !== "object" || Array.isArray(data))
+          return null;
         return data;
       })
-      .then(data => {
+      .then((data) => {
         if (data && data._id) {
           setProfile(data);
           setForm(data);
@@ -69,11 +150,11 @@ const countries = [
         } else {
           setProfile(null);
           setForm({
-            fullName: '',
-            country: '',
-            city: '',
-            address: '',
-            phone: '',
+            fullName: "",
+            country: "",
+            city: "",
+            address: "",
+            phone: "",
           });
           setIsNew(true);
         }
@@ -86,27 +167,27 @@ const countries = [
       });
   }, [user]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleEdit = () => {
     setEdit(true);
-    setMsg('');
-    setError('');
+    setMsg("");
+    setError("");
   };
 
   const handleCancel = () => {
     setEdit(false);
     setForm(profile);
-    setMsg('');
-    setError('');
+    setMsg("");
+    setError("");
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setMsg('');
-    setError('');
+    setMsg("");
+    setError("");
     const updateData = {
       fullName: form.fullName,
       country: form.country,
@@ -118,34 +199,38 @@ const countries = [
       let res, data;
       if (isNew) {
         res = await fetch(`/api/profile`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             ...updateData,
             username: user.username,
             email: user.email,
-            password: "123456" // Remove or handle securely in production
+            password: "123456", // Remove or handle securely in production
           }),
         });
       } else {
         res = await fetch(`/api/profile/username/${user.username}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(updateData),
         });
       }
       data = await res.json();
       if (!res.ok) {
-        setError(data.error || 'Operation failed.');
+        setError(data.error || "Operation failed.");
       } else {
         setProfile(data);
         setForm(data);
         setEdit(false);
         setIsNew(false);
-        setMsg(isNew ? 'Profile created successfully!' : 'Profile updated successfully!');
+        setMsg(
+          isNew
+            ? "Profile created successfully!"
+            : "Profile updated successfully!"
+        );
       }
     } catch (err) {
-      setError('Operation failed.');
+      setError("Operation failed.");
     }
   };
 
@@ -169,7 +254,9 @@ const countries = [
   if (user === null) {
     return (
       <div className="profile-container">
-        <div className="profile-error">You must be logged in to view your profile.</div>
+        <div className="profile-error">
+          You must be logged in to view your profile.
+        </div>
       </div>
     );
   }
@@ -190,7 +277,9 @@ const countries = [
         <div className="profile-card">
           <div className="profile-avatar">
             <img
-              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(profile.fullName || user.username)}&background=1976d2&color=fff&size=128`}
+              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+                profile.fullName || user.username
+              )}&background=1976d2&color=fff&size=128`}
               alt={profile.fullName || user.username}
             />
           </div>
@@ -198,17 +287,32 @@ const countries = [
             <h2>{profile.fullName}</h2>
             <p className="profile-username">@{user.username}</p>
             <p>
-              <span role="img" aria-label="country">🌍</span> {profile.country}
-              <span style={{ marginLeft: 16 }} role="img" aria-label="city">🏙️</span> {profile.city}
+              <span role="img" aria-label="country">
+                🌍
+              </span>{" "}
+              {profile.country}
+              <span style={{ marginLeft: 16 }} role="img" aria-label="city">
+                🏙️
+              </span>{" "}
+              {profile.city}
             </p>
             <p>
-              <span role="img" aria-label="email">📧</span> {user.email}
+              <span role="img" aria-label="email">
+                📧
+              </span>{" "}
+              {user.email}
             </p>
             <p>
-              <span role="img" aria-label="phone">📞</span> {profile.phone}
+              <span role="img" aria-label="phone">
+                📞
+              </span>{" "}
+              {profile.phone}
             </p>
             <p>
-              <span role="img" aria-label="address">🏠</span> {profile.address}
+              <span role="img" aria-label="address">
+                🏠
+              </span>{" "}
+              {profile.address}
             </p>
             <button className="profile-edit-btn" onClick={handleEdit}>
               Edit Profile
@@ -222,7 +326,9 @@ const countries = [
         <div className="profile-card profile-card-empty">
           <div className="profile-avatar">
             <img
-              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.username)}&background=1976d2&color=fff&size=128`}
+              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+                user.username
+              )}&background=1976d2&color=fff&size=128`}
               alt={user.username}
             />
           </div>
@@ -240,12 +346,19 @@ const countries = [
       {/* Edit/Add Form */}
       {(edit || isNew) && (
         <form className="profile-form" onSubmit={handleSubmit}>
-          <h3>{isNew ? 'Create Your Profile' : 'Edit Profile'}</h3>
+          <h3>{isNew ? "Create Your Profile" : "Edit Profile"}</h3>
           <div className="profile-form-row">
-            <label>Full Name
-              <input name="fullName" value={form.fullName || ''} onChange={handleChange} required />
+            <label>
+              Full Name
+              <input
+                name="fullName"
+                value={form.fullName || ""}
+                onChange={handleChange}
+                required
+              />
             </label>
-            <label>Username
+            <label>
+              Username
               <input name="username" value={user.username} disabled />
             </label>
           </div>
@@ -253,46 +366,84 @@ const countries = [
             {/* <label>Country
               <input name="country" value={form.country || ''} onChange={handleChange} required />
             </label> */}
-            <label>Country
-  <select
-    name="country"
-    value={form.country || ''}
-    onChange={handleChange}
-    required
-  >
-    <option value="" disabled>Select country</option>
-    {countries.map(c => (
-      <option key={c.name} value={c.name}>
-        {c.name}
-      </option>
-    ))}
-  </select>
-</label>
-            <label>City
-              <input name="city" value={form.city || ''} onChange={handleChange} required />
+            <label>
+              Country
+              <select
+                name="country"
+                value={form.country || ""}
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled>
+                  Select country
+                </option>
+                {countries.map((c) => (
+                  <option key={c.name} value={c.name}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              City
+              <input
+                name="city"
+                value={form.city || ""}
+                onChange={handleChange}
+                required
+              />
             </label>
           </div>
           <div className="profile-form-row">
-            <label>Address
-              <input name="address" value={form.address || ''} onChange={handleChange} required />
+            <label>
+              Address
+              <input
+                name="address"
+                value={form.address || ""}
+                onChange={handleChange}
+                required
+              />
             </label>
-            <label>Phone
-              <input name="phone" value={form.phone || ''} onChange={handleChange} required />
+            <label>
+              Phone
+              <input
+                name="phone"
+                value={form.phone || ""}
+                onChange={handleChange}
+                required
+              />
             </label>
           </div>
           <div className="profile-form-row">
-            <label>Email
+            <label>
+              Email
               <input name="email" type="email" value={user.email} disabled />
             </label>
-            <label>Password
-              <input name="password" type="password" value="********" disabled />
+            <label>
+              Password
+              <input
+                name="password"
+                type="password"
+                value="********"
+                disabled
+              />
             </label>
           </div>
           {error && <div className="profile-error">{error}</div>}
           {msg && <div className="profile-success">{msg}</div>}
           <div className="profile-form-actions">
-            <button className="profile-save-btn" type="submit">{isNew ? 'Create Profile' : 'Save Changes'}</button>
-            {!isNew && <button className="profile-cancel-btn" type="button" onClick={handleCancel}>Cancel</button>}
+            <button className="profile-save-btn" type="submit">
+              {isNew ? "Create Profile" : "Save Changes"}
+            </button>
+            {!isNew && (
+              <button
+                className="profile-cancel-btn"
+                type="button"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </form>
       )}
@@ -306,14 +457,22 @@ const countries = [
               <span className="profile-insight-icon">🕒</span>
               <div>
                 <div className="profile-insight-label">Joined</div>
-                <div className="profile-insight-value">{profile.createdAt ? new Date(profile.createdAt).toLocaleDateString() : '-'}</div>
+                <div className="profile-insight-value">
+                  {profile.createdAt
+                    ? new Date(profile.createdAt).toLocaleDateString()
+                    : "-"}
+                </div>
               </div>
             </div>
             <div className="profile-insight-card">
               <span className="profile-insight-icon">🔄</span>
               <div>
                 <div className="profile-insight-label">Last Updated</div>
-                <div className="profile-insight-value">{profile.updatedAt ? new Date(profile.updatedAt).toLocaleDateString() : '-'}</div>
+                <div className="profile-insight-value">
+                  {profile.updatedAt
+                    ? new Date(profile.updatedAt).toLocaleDateString()
+                    : "-"}
+                </div>
               </div>
             </div>
             <div className="profile-insight-card">
@@ -333,7 +492,9 @@ const countries = [
         <ul>
           <li>Use a strong, unique password for your account.</li>
           <li>Never share your password with anyone.</li>
-          <li>Update your information regularly to keep your account secure.</li>
+          <li>
+            Update your information regularly to keep your account secure.
+          </li>
         </ul>
       </div>
 
@@ -341,7 +502,8 @@ const countries = [
       <div className="profile-section">
         <h3>Need Help?</h3>
         <p>
-          For support or questions, contact us at <a href="mailto:info@civianalytics.com">info@civianalytics.com</a>
+          For support or questions, contact us at{" "}
+          <a href="mailto:info@civianalytics.com">info@civianalytics.com</a>
         </p>
       </div>
     </div>
