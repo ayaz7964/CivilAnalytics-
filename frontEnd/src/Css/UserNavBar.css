@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(90deg, #23447c 60%, #5b2be7 100%);
+  background-color: #0f5562;
   padding: 0.5rem 2rem;
   height: 64px;
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
@@ -42,6 +42,7 @@
 }
 
 .navbar-links li a {
+  position: relative;
   color: #fff;
   font-size: 1.1rem;
   font-weight: 500;
@@ -50,10 +51,27 @@
   padding-bottom: 2px;
 }
 
+.navbar-links li a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2.5px;
+  background: #f59e0b;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
 .navbar-links li a:hover,
 .navbar-links li a.active {
-  color: #ffd600;
-  border-bottom: 2px solid #ffd600;
+  color: #f59e0b;
+}
+
+.navbar-links li a:hover::after,
+.navbar-links li a.active::after {
+  width: 100%;
 }
 
 .navbar-search {
@@ -115,8 +133,8 @@
 
 .navbar-logout {
   background: transparent;
-  border: 1.5px solid #ffd600;
-  color: #ffd600;
+  border: 1.5px solid #f59e0b;
+  color: #f59e0b;
   padding: 0.4rem 1.1rem;
   border-radius: 1.2rem;
   font-size: 1rem;
@@ -127,7 +145,7 @@
 }
 
 .navbar-logout:hover {
-  background: #ffd600;
+  background: #f59e0b;
   color: #2d2d2d;
 }
 .navbar-user {
@@ -140,7 +158,7 @@
 .navbar-avatar {
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, #ffd600 60%, #5b2be7 100%);
+  background: linear-gradient(135deg, #f59e0b 60%, #5b2be7 100%);
   color: #222;
   border-radius: 50%;
   display: flex;
@@ -175,8 +193,8 @@
 
 .navbar-logout {
   background: transparent;
-  border: 1.5px solid #ffd600;
-  color: #ffd600;
+  border: 1.5px solid #f59e0b;
+  color: #f59e0b;
   padding: 0.2rem 1.1rem;
   border-radius: 1.2rem;
   font-size: 1rem;
@@ -187,7 +205,7 @@
 }
 
 .navbar-logout:hover {
-  background: #ffd600;
+  background: #f59e0b;
   color: #2d2d2d;
   border: 1.5px solid #fff;
 }

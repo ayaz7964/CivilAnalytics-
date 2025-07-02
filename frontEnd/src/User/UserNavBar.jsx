@@ -32,7 +32,7 @@ export default function UserNavBar() {
         </li>
         {/* <li><Link to="/settings">Setting</Link></li> */}
         <li>
-          <Link to="/survey">survey</Link>
+          <Link to="/survey">Survey</Link>
         </li>
       </ul>
       {/* <div className="navbar-search">
