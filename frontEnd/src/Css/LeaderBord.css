@@ -1,3 +1,92 @@
+/* Prevent horizontal scroll globally */
+html, body {
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Main leaderboard containers never overflow */
+.leaderboard-table,
+.leaderboard-header-row,
+.leaderboard-row {
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .leaderboard-header-row, .leaderboard-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 8px;
+  }
+  .leaderboard-flag-col, .leaderboard-score-col {
+    width: 100%;
+  }
+  .leaderboard-bar {
+    width: 100%;
+    min-width: 0;
+  }
+  .leaderboard-rank-col,
+  .leaderboard-users-col {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .leaderboard-table {
+    padding: 0 2px;
+    border-radius: 8px;
+  }
+  .leaderboard-header-row,
+  .leaderboard-row {
+    padding: 8px 2px;
+    font-size: 0.98rem;
+  }
+  .leaderboard-flag-col {
+    gap: 8px;
+  }
+  .leaderboard-flag {
+    width: 32px;
+    height: 22px;
+  }
+  .leaderboard-country-name {
+    font-size: 0.98rem;
+  }
+  .leaderboard-score-value {
+    font-size: 0.98rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .leaderboard-table {
+    padding: 0 1px;
+  }
+  .leaderboard-header-row,
+  .leaderboard-row {
+    padding: 4px 1px;
+    font-size: 0.9rem;
+  }
+  .leaderboard-country-name {
+    font-size: 0.9rem;
+  }
+}
+
+/* Prevent any child from causing overflow */
+.leaderboard-table *,
+.leaderboard-header-row *,
+.leaderboard-row * {
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+
 /* Leaderboard specific styles */
 .domain-filter-row {
   display: flex;

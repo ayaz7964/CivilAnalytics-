@@ -1,3 +1,140 @@
+/* Prevent horizontal scroll globally */
+html, body {
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Main containers never overflow */
+.dashboardContainer,
+.featured-country-section,
+.country-scroll-section,
+.country-row,
+.stats-section,
+.stats-container,
+.global-insights,
+.global-avg-row,
+.cta-section,
+.quoteSection {
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+  .dashboardContainer {
+    padding: 24px 8px;
+  }
+}
+
+@media (max-width: 900px) {
+  .featured-country-section {
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+    padding: 18px 8px;
+  }
+  .country-row, .global-avg-row, .stats-container {
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .country-card, .global-avg-card, .stat {
+    margin: 8px 0;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .country-scroll-section {
+    padding-bottom: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboardContainer {
+    padding: 12px 2px;
+    border-radius: 8px;
+  }
+  .featured-country-section {
+    padding: 10px 2px;
+    border-radius: 8px;
+  }
+  .country-card {
+    padding: 12px 6px 10px 6px;
+    border-radius: 10px;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .country-row {
+    min-width: 0;
+    gap: 10px;
+  }
+  .country-image {
+    height: 80px;
+  }
+  .global-avg-card {
+    padding: 10px 8px;
+    border-radius: 8px;
+    min-width: 0;
+  }
+  .cta-section {
+    padding: 18px 4px;
+    border-radius: 8px;
+  }
+  .stat {
+    padding: 12px;
+    border-radius: 8px;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .circle {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  .quoteSection blockquote {
+    font-size: 1rem;
+    padding-left: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dashboardContainer {
+    padding: 4px 0;
+  }
+  .featured-country-section {
+    padding: 4px 0;
+  }
+  .country-card {
+    padding: 6px 2px 6px 2px;
+  }
+  .global-avg-card {
+    padding: 6px 2px;
+  }
+  .cta-section {
+    padding: 8px 2px;
+  }
+}
+
+/* Prevent any child from causing overflow */
+.dashboardContainer *,
+.featured-country-section *,
+.country-scroll-section *,
+.country-row *,
+.stats-section *,
+.stats-container *,
+.global-insights *,
+.global-avg-row *,
+.cta-section *,
+.quoteSection * {
+  box-sizing: border-box;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 .dashboardContainer {
   max-width: 1200px;
   margin: 32px auto;
