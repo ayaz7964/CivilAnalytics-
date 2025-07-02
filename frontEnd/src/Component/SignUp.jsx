@@ -8,9 +8,7 @@ export default function SignUp() {
   const [serverError, setServerError] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    document.title = "Sign Up - Your App Name";
-  }, []);
+  
 
   const formik = useFormik({
     initialValues: {
