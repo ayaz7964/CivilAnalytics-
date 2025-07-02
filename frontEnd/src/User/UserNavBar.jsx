@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useUser } from "../User/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 // ...existing imports...
 import "../Css/UserNavBar.css";
 
@@ -25,14 +25,14 @@ export default function UserNavBar() {
       </div>
       <ul className="navbar-links">
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <NavLink to="/profile">Profile</NavLink>
         </li>
         {/* <li><Link to="/settings">Setting</Link></li> */}
         <li>
-          <Link to="/survey">Survey</Link>
+          <NavLink to="/survey">Survey</NavLink>
         </li>
       </ul>
       {/* <div className="navbar-search">
