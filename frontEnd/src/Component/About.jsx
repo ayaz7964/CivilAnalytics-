@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Css/About.css';
+import {Link} from 'react-router-dom'
 
 export default function About(){
   return (
@@ -115,7 +116,7 @@ export default function About(){
             <p className="cta-text">
               Ready to share your experience? Take our survey and help your country improve its services for everyone.
             </p>
-            <button className="cta-button">Take Survey Now</button>
+           <Link to = '/login'className="cta-btn">Take a Survey</Link>
           </div>
         </section>
       </div>

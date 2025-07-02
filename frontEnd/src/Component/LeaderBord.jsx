@@ -3,27 +3,17 @@ import '../Css/LeaderBord.css'; // Ensure this path is correct
 import { Link } from 'react-router-dom';
 
 const satisfiedCountries = [
- { name: "Pakistan", image: "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg" },
-  { name: "France", image: "https://cdn.pixabay.com/photo/2017/08/25/20/04/international-2681245_1280.jpg" },
-  { name: "China", image: "https://cdn.pixabay.com/photo/2017/08/29/22/10/germany-2695058_1280.jpg" },
-  { name: "UK", image: "https://cdn.pixabay.com/photo/2017/08/28/18/51/international-2690850_1280.jpg" },
-  { name: "USA", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "India", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Bangladesh", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Iran", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Russia", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Switzerland", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Singapore", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Afghanistan", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "England", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Germany", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Italy", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Spain", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Turkey", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Japan", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "South Korea", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Canada", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-];
+  { name: "Pakistan", image: "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg" },
+  { name: "Iran", image: "https://cdn.pixabay.com/photo/2018/12/07/07/43/flag-3861226_1280.jpg" },
+  { name: "China", image: "https://cdn.pixabay.com/photo/2012/04/10/23/05/china-26841_1280.png" },
+  { name: "USA", image: "https://cdn.pixabay.com/photo/2012/04/12/23/52/usa-31021_1280.png" },
+  { name: "India", image: "https://cdn.pixabay.com/photo/2022/06/21/02/47/indian-national-flag-7274918_1280.png" },
+  { name: "Bangladesh", image: "https://cdn.pixabay.com/photo/2013/07/13/14/14/bangladesh-162238_1280.png" },
+  { name: "Russia", image: "https://cdn.pixabay.com/photo/2013/07/13/14/17/russia-162400_1280.png" },
+  { name: "Singapore", image: "https://cdn.pixabay.com/photo/2012/04/10/22/58/singapore-26793_1280.png" },
+  { name: "Afghanistan", image: "https://cdn.pixabay.com/photo/2012/04/10/22/59/afghanistan-26801_1280.png" },
+  { name: "England", image: "https://cdn.pixabay.com/photo/2012/04/11/15/31/united-28519_1280.png" },
+]
 
 const domains = [
   { key: 'Overall', label: 'Overall' },
@@ -105,7 +95,7 @@ export default function LeaderBord() {
           <span className="leaderboard-score-col">
             {sortDomain === 'Overall' ? 'Overall Satisfaction' : `${domains.find(d => d.key === sortDomain).label} Satisfaction`}
           </span>
-          <span className="leaderboard-users-col">Users</span>
+          <span className="leaderboard-users-col">People</span>
         </div>
         {loading ? (
           <div style={{ width: '100%', textAlign: 'center', padding: 24 }}>

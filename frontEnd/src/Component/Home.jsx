@@ -1,29 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import '../Css/Home.css';
-import StatsSection from './StatsSection';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "../Css/Home.css";
+import StatsSection from "./StatsSection";
+import { Link } from "react-router-dom";
 
 const satisfiedCountries = [
-  { name: "Pakistan", image: "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg" },
-  { name: "France", image: "https://cdn.pixabay.com/photo/2017/08/25/20/04/international-2681245_1280.jpg" },
-  { name: "China", image: "https://cdn.pixabay.com/photo/2017/08/29/22/10/germany-2695058_1280.jpg" },
-  { name: "UK", image: "https://cdn.pixabay.com/photo/2017/08/28/18/51/international-2690850_1280.jpg" },
-  { name: "USA", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "India", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Bangladesh", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Iran", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Russia", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Switzerland", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Singapore", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Afghanistan", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "England", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Germany", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Italy", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Spain", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Turkey", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Japan", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "South Korea", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
-  { name: "Canada", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  {
+    name: "Pakistan",
+    image:
+      "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg",
+  },
+  {
+    name: "Iran",
+    image:
+      "https://cdn.pixabay.com/photo/2018/12/07/07/43/flag-3861226_1280.jpg",
+  },
+  {
+    name: "China",
+    image:
+      "https://cdn.pixabay.com/photo/2012/04/10/23/05/china-26841_1280.png",
+  },
+  {
+    name: "USA",
+    image: "https://cdn.pixabay.com/photo/2012/04/12/23/52/usa-31021_1280.png",
+  },
+  {
+    name: "India",
+    image:
+      "https://cdn.pixabay.com/photo/2022/06/21/02/47/indian-national-flag-7274918_1280.png",
+  },
+  {
+    name: "Bangladesh",
+    image:
+      "https://cdn.pixabay.com/photo/2013/07/13/14/14/bangladesh-162238_1280.png",
+  },
+  {
+    name: "Russia",
+    image:
+      "https://cdn.pixabay.com/photo/2013/07/13/14/17/russia-162400_1280.png",
+  },
+  {
+    name: "Singapore",
+    image:
+      "https://cdn.pixabay.com/photo/2012/04/10/22/58/singapore-26793_1280.png",
+  },
+  {
+    name: "Afghanistan",
+    image:
+      "https://cdn.pixabay.com/photo/2012/04/10/22/59/afghanistan-26801_1280.png",
+  },
+  {
+    name: "England",
+    image:
+      "https://cdn.pixabay.com/photo/2012/04/11/15/31/united-28519_1280.png",
+  },
 ];
 
 export default function Home() {
@@ -31,9 +60,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/')
-      .then(res => res.json())
-      .then(data => {
+    fetch("/api/")
+      .then((res) => res.json())
+      .then((data) => {
         setCountries(data);
         setLoading(false);
       })
@@ -43,18 +72,20 @@ export default function Home() {
   const avgDomain = (country, domain) =>
     country.TotalUser > 0
       ? ((country[domain] / (country.TotalUser * 20)) * 100).toFixed(1)
-      : 'N/A';
+      : "N/A";
 
   const countrySatisfaction = (country) =>
     country.TotalUser > 0
       ? ((country.TotalScore / (country.TotalUser * 100)) * 100).toFixed(1)
-      : 'N/A';
+      : "N/A";
 
   const getCountryImage = (name) => {
     const found = satisfiedCountries.find(
       (c) => c.name.toLowerCase() === name.toLowerCase()
     );
-    return found ? found.image : "https://via.placeholder.com/320x120?text=No+Image";
+    return found
+      ? found.image
+      : "https://via.placeholder.com/320x120?text=No+Image";
   };
 
   // Sort all countries for global ranking
@@ -67,15 +98,28 @@ export default function Home() {
   // Global averages for insights
   const globalStats = (() => {
     if (!countries.length) return {};
-    const domains = ['Healthcare', 'Education', 'Employment', 'Transportation', 'PublicSafety'];
+    const domains = [
+      "Healthcare",
+      "Education",
+      "Employment",
+      "Transportation",
+      "PublicSafety",
+    ];
     const totalUsers = countries.reduce((sum, c) => sum + c.TotalUser, 0);
     const avg = {};
-    domains.forEach(domain => {
+    domains.forEach((domain) => {
       const sum = countries.reduce((acc, c) => acc + (c[domain] || 0), 0);
-      avg[domain] = totalUsers > 0 ? ((sum / (totalUsers * 20)) * 100).toFixed(1) : 'N/A';
+      avg[domain] =
+        totalUsers > 0 ? ((sum / (totalUsers * 20)) * 100).toFixed(1) : "N/A";
     });
-    const totalScore = countries.reduce((acc, c) => acc + (c.TotalScore || 0), 0);
-    avg.Overall = totalUsers > 0 ? ((totalScore / (totalUsers * 100)) * 100).toFixed(1) : 'N/A';
+    const totalScore = countries.reduce(
+      (acc, c) => acc + (c.TotalScore || 0),
+      0
+    );
+    avg.Overall =
+      totalUsers > 0
+        ? ((totalScore / (totalUsers * 100)) * 100).toFixed(1)
+        : "N/A";
     return avg;
   })();
 
@@ -88,7 +132,8 @@ export default function Home() {
       <div className="header">
         <h2>🌍 Global Country Satisfaction Dashboard</h2>
         <p className="motivation">
-          Explore the top 5 countries by citizen satisfaction. Your feedback shapes a better world!
+          Explore the top 5 countries by citizen satisfaction. Your feedback
+          shapes a better world!
         </p>
       </div>
 
@@ -100,24 +145,33 @@ export default function Home() {
               src={getCountryImage(featured.CountryName)}
               alt={featured.CountryName}
               className="featured-country-image"
-              onError={e => { e.target.src = "https://via.placeholder.com/320x120?text=No+Image"; }}
+              onError={(e) => {
+                e.target.src =
+                  "https://via.placeholder.com/320x120?text=No+Image";
+              }}
             />
           </div>
           <div className="featured-country-info">
             <div className="featured-rank">#1</div>
-            <h2>{featured.CountryName} <span className="featured-badge">Top Ranked</span></h2>
+            <h2>
+              {featured.CountryName}{" "}
+              <span className="featured-badge">Top Ranked</span>
+            </h2>
             <div className="progressBarBackground main-bar">
               <div
                 className="progressBarFill"
                 style={{
                   width: `${countrySatisfaction(featured)}%`,
-                  background: 'linear-gradient(90deg, #ff9800 0%, #43a047 100%)',
+                  background:
+                    "linear-gradient(90deg, #ff9800 0%, #43a047 100%)",
                 }}
               ></div>
             </div>
             <div className="progressText">
               <strong>Overall Satisfaction:</strong>
-              <span className="country-score">{countrySatisfaction(featured)}%</span>
+              <span className="country-score">
+                {countrySatisfaction(featured)}%
+              </span>
             </div>
             <div className="featured-country-users">
               <span>👥 {featured.TotalUser} People</span>
@@ -129,11 +183,11 @@ export default function Home() {
       {/* Horizontal Scrollable Countries */}
       <div className="country-scroll-section">
         {loading ? (
-          <div style={{ width: '100%', textAlign: 'center' }}>
+          <div style={{ width: "100%", textAlign: "center" }}>
             <h3>Loading countries...</h3>
           </div>
         ) : sortedCountries.length === 0 ? (
-          <div style={{ width: '100%', textAlign: 'center' }}>
+          <div style={{ width: "100%", textAlign: "center" }}>
             <h3>No country data available.</h3>
           </div>
         ) : (
@@ -141,16 +195,29 @@ export default function Home() {
             {sortedCountries.map((country, idx) => {
               const satisfaction = countrySatisfaction(country);
               const domains = [
-                { label: "Healthcare", value: avgDomain(country, 'Healthcare') },
-                { label: "Education", value: avgDomain(country, 'Education') },
-                { label: "Employment", value: avgDomain(country, 'Employment') },
-                { label: "Transportation", value: avgDomain(country, 'Transportation') },
-                { label: "Public Safety", value: avgDomain(country, 'PublicSafety') },
+                {
+                  label: "Healthcare",
+                  value: avgDomain(country, "Healthcare"),
+                },
+                { label: "Education", value: avgDomain(country, "Education") },
+                {
+                  label: "Employment",
+                  value: avgDomain(country, "Employment"),
+                },
+                {
+                  label: "Transportation",
+                  value: avgDomain(country, "Transportation"),
+                },
+                {
+                  label: "Public Safety",
+                  value: avgDomain(country, "PublicSafety"),
+                },
               ];
               // Find global ranking
-              const globalRank = rankedCountries.findIndex(
-                c => c.CountryName === country.CountryName
-              ) + 1;
+              const globalRank =
+                rankedCountries.findIndex(
+                  (c) => c.CountryName === country.CountryName
+                ) + 1;
               return (
                 <div className="country-card" key={country._id || idx}>
                   <div className="country-rank-badge">#{globalRank}</div>
@@ -159,7 +226,10 @@ export default function Home() {
                       src={getCountryImage(country.CountryName)}
                       alt={country.CountryName}
                       className="country-image"
-                      onError={e => { e.target.src = "https://via.placeholder.com/320x120?text=No+Image"; }}
+                      onError={(e) => {
+                        e.target.src =
+                          "https://via.placeholder.com/320x120?text=No+Image";
+                      }}
                     />
                   </div>
                   <h3 className="country-title">{country.CountryName}</h3>
@@ -168,7 +238,8 @@ export default function Home() {
                       className="progressBarFill"
                       style={{
                         width: `${satisfaction}%`,
-                        background: 'linear-gradient(90deg, #ff9800 0%, #43a047 100%)',
+                        background:
+                          "linear-gradient(90deg, #ff9800 0%, #43a047 100%)",
                       }}
                     ></div>
                   </div>
@@ -186,7 +257,8 @@ export default function Home() {
                             className="progressBarFill"
                             style={{
                               width: `${domain.value}%`,
-                              background: 'linear-gradient(90deg, #1976d2 0%, #00bcd4 100%)',
+                              background:
+                                "linear-gradient(90deg, #1976d2 0%, #00bcd4 100%)",
                               height: 18,
                             }}
                           ></div>
@@ -195,7 +267,7 @@ export default function Home() {
                     ))}
                   </ul>
                   <div className="country-users">
-                    <span>👥 {country.TotalUser} users</span>
+                    <span>👥 {country.TotalUser} People</span>
                   </div>
                 </div>
               );
@@ -238,16 +310,21 @@ export default function Home() {
       {/* Call to Action */}
       <div className="cta-section">
         <h2>Ready to Make a Difference?</h2>
-        <p>Share your experience and help your country climb the satisfaction ranks!</p>
-        <Link to = '/login'className="cta-btn">Take a Survey</Link>
+        <p>
+          Share your experience and help your country climb the satisfaction
+          ranks!
+        </p>
+        <Link to="/login" className="cta-btn">
+          Take a Survey
+        </Link>
       </div>
 
       {/* Statistics Section */}
 
       <div id="platform-statistics">
-        <StatsSection/>
+        <StatsSection />
       </div>
-      
+
       {/* <div className="stats-section">
         <h2>Platform Statistics</h2>
         <div className="stats-container">
@@ -277,7 +354,8 @@ export default function Home() {
       {/* Motivational Quote */}
       <div className="quoteSection">
         <blockquote>
-          "Every voice counts. See how your country is performing and inspire positive change!"
+          "Every voice counts. See how your country is performing and inspire
+          positive change!"
         </blockquote>
       </div>
     </div>
