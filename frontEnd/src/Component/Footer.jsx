@@ -109,8 +109,9 @@ export default function Footer() {
 
           {/* Resources */}
           <div className="FooterPro-Column resources">
-            <h4 className="FooterPro-ColumnTitle">Resources</h4>
+            {/* <h4 className="FooterPro-ColumnTitle">Resources</h4> */}
             <ul className="FooterPro-LinkList">
+              <h4 className="FooterPro-ColumnTitle">Resources</h4>
               <li className="FooterPro-LinkItem">
                 <Link to="/home" className="FooterPro-Link">
                   Documentation

@@ -1,6 +1,10 @@
 .stats-section {
   text-align: center;
   padding: 40px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .stats-container {
@@ -8,6 +12,10 @@
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .stat {
@@ -16,6 +24,10 @@
   border-radius: 12px;
   width: 160px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 12px 0;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .circle {
@@ -30,4 +42,61 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .stats-container {
+    gap: 20px;
+  }
+  .stat {
+    width: 200px;
+  }
+}
+
+@media (max-width: 900px) {
+  .stats-section {
+    padding: 24px 8px;
+  }
+  .stats-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    max-width: 100vw;
+    overflow: visible;
+  }
+  .stat {
+    width: 100%;
+    max-width: 500px;
+    min-width: 0;
+    margin: 8px 0;
+  }
+  .circle {
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-section {
+    padding: 12px 2px;
+  }
+  .stats-container {
+    gap: 12px;
+  }
+  .stat {
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+    margin: 6px 0;
+  }
+  .circle {
+    width: 44px;
+    height: 44px;
+    font-size: 15px;
+  }
 }

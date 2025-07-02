@@ -49,6 +49,7 @@ body {
     max-width: 100%;
     min-width: 0;
     width: 100%;
+    height: auto;
     box-sizing: border-box;
   }
   .country-scroll-section {
@@ -110,6 +111,9 @@ body {
   }
   .featured-country-section {
     padding: 4px 0;
+  }
+  .stats-section {
+    height: auto;
   }
   .country-card {
     padding: 6px 2px 6px 2px;
@@ -407,7 +411,6 @@ body {
   display: flex;
   justify-content: center;
   gap: 32px;
-  flex-wrap: wrap;
 }
 .stat {
   background: #f9fafb;

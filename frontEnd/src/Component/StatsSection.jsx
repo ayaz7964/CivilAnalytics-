@@ -1,5 +1,6 @@
 import React from "react";
 import Stat from "./Stat"; // adjust the path if needed
+import "../Css/StatsSection.css";
 
 const statsData = [
   { label: "People Joined", target: 10000, suffix: "K+" },
