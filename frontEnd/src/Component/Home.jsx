@@ -325,7 +325,6 @@ export default function Home() {
         <StatsSection />
       </div>
 
-
       {/* Motivational Quote */}
       <div className="quoteSection">
         <blockquote>
