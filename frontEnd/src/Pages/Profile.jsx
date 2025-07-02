@@ -13,6 +13,29 @@ export default function Profile() {
   const [error, setError] = useState('');
   const [isNew, setIsNew] = useState(false);
 
+const countries = [
+  { name: "Pakistan", image: "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg" },
+  { name: "France", image: "https://cdn.pixabay.com/photo/2017/08/25/20/04/international-2681245_1280.jpg" },
+  { name: "China", image: "https://cdn.pixabay.com/photo/2017/08/29/22/10/germany-2695058_1280.jpg" },
+  { name: "UK", image: "https://cdn.pixabay.com/photo/2017/08/28/18/51/international-2690850_1280.jpg" },
+  { name: "USA", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "India", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Bangladesh", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Iran", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Russia", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Switzerland", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Singapore", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Afghanistan", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "England", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Germany", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Italy", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Spain", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Turkey", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Japan", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "South Korea", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+  { name: "Canada", image: "https://cdn.pixabay.com/photo/2017/08/29/12/47/international-2693231_1280.jpg" },
+];
+
   // Debug: log user object
   useEffect(() => {
     console.log('User from context:', user);
@@ -227,9 +250,24 @@ export default function Profile() {
             </label>
           </div>
           <div className="profile-form-row">
-            <label>Country
+            {/* <label>Country
               <input name="country" value={form.country || ''} onChange={handleChange} required />
-            </label>
+            </label> */}
+            <label>Country
+  <select
+    name="country"
+    value={form.country || ''}
+    onChange={handleChange}
+    required
+  >
+    <option value="" disabled>Select country</option>
+    {countries.map(c => (
+      <option key={c.name} value={c.name}>
+        {c.name}
+      </option>
+    ))}
+  </select>
+</label>
             <label>City
               <input name="city" value={form.city || ''} onChange={handleChange} required />
             </label>
