@@ -6,6 +6,7 @@ import Survey from "../Pages/survey";
 import Profile from "../Pages/Profile";
 import Settings from "../Pages/Settings";
 import Footer from "../Component/Footer";
+import UserFooter from "../Component/UserFooter";
 
 // You can add more user-specific pages as needed
 
@@ -23,7 +24,7 @@ export default function UserRoutes() {
         {/* Catch-all for unknown routes */}
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
-      <Footer />
+      <UserFooter />
     </>
   );
 }
