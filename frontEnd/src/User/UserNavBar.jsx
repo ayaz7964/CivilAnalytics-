@@ -1,20 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useUser } from "../User/UserContext";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-// ...existing imports...
 import "../Css/UserNavBar.css";
 
 export default function UserNavBar() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/");
   };
-  const profile = state.user?.username ? state.user.username : "Profile";
+
   return (
-    <nav className="navbar">
+    <nav className="NavBar">
       <div className="NavBar-LogoSection">
         <Link to="/" className="NavBar-LogoSection-Link">
           <span className="NavBar-Logo-Icon" aria-label="SatisNation Logo">
@@ -23,44 +23,58 @@ export default function UserNavBar() {
           <span className="NavBar-Logo-Text">SatisNation</span>
         </Link>
       </div>
-      <ul className="navbar-links">
-        <li>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+
+      {/* Mobile Menu Toggle */}
+      <div className="NavBar-MenuToggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}></span>
+        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}></span>
+        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}></span>
+      </div>
+
+      <ul className={`NavBar-Links ${isMenuOpen ? "active" : ""}`}>
+        <li className="NavBar-Link-Item">
+          <NavLink
+            to="/dashboard"
+            className="NavBar-Link"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Dashboard
+          </NavLink>
         </li>
-        <li>
-          <NavLink to="/profile">Profile</NavLink>
+        <li className="NavBar-Link-Item">
+          <NavLink
+            to="/profile"
+            className="NavBar-Link"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Profile
+          </NavLink>
         </li>
-        {/* <li><Link to="/settings">Setting</Link></li> */}
-        <li>
-          <NavLink to="/survey">Survey</NavLink>
+        <li className="NavBar-Link-Item">
+          <NavLink
+            to="/survey"
+            className="NavBar-Link"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Survey
+          </NavLink>
         </li>
       </ul>
-      {/* <div className="navbar-search">
-        <input type="text" placeholder="Search surveys, topic..." />
-        <span className="search-icon" role="img" aria-label="search">🔍</span>
-      </div> */}
 
-      {/* <div className="navbar-user">
-        <span className="navbar-username">
-          {state.user?.username ? state.user.username : "Username"}
-          
-        </span>
-        <button className="navbar-logout" onClick={handleLogout}>
-          Logout
-        </button>
-      </div> */}
-      {/* // ...existing code... */}
-      <div className="navbar-user">
-        <div className="navbar-avatar" title={state.user?.username || "User"}>
+      <div className="NavBar-ProfileSection">
+        <div
+          className="NavBar-UserAvatar"
+          title={state.user?.username || "User"}
+        >
           {state.user?.username
             ? state.user.username.charAt(0).toUpperCase()
             : "U"}
         </div>
-        <div className="navbar-user-info">
-          <span className="navbar-username">
+        <div className="NavBar-UserInfo">
+          <span className="NavBar-UserName">
             {state.user?.username ? state.user.username : "Username"}
           </span>
-          <button className="navbar-logout" onClick={handleLogout}>
+          <button className="NavBar-LogoutBtn" onClick={handleLogout}>
             Logout
           </button>
         </div>
