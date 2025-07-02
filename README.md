@@ -65,7 +65,7 @@ npm install
 ### Backend
 ```bash
 cd Backend
-npm start
+npm run dev
 
 ```
 The backend will start on [http://localhost:5000](http://localhost:5000) (or your configured port).
