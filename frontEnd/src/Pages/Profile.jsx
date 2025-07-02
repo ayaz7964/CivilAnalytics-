@@ -14,17 +14,56 @@ export default function Profile() {
   const [isNew, setIsNew] = useState(false);
 
   const countries = [
-    
-  { name: "Pakistan", image: "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg" },
-  { name: "Iran", image: "https://cdn.pixabay.com/photo/2018/12/07/07/43/flag-3861226_1280.jpg" },
-  { name: "China", image: "https://cdn.pixabay.com/photo/2012/04/10/23/05/china-26841_1280.png" },
-  { name: "USA", image: "https://cdn.pixabay.com/photo/2012/04/12/23/52/usa-31021_1280.png" },
-  { name: "India", image: "https://cdn.pixabay.com/photo/2022/06/21/02/47/indian-national-flag-7274918_1280.png" },
-  { name: "Bangladesh", image: "https://cdn.pixabay.com/photo/2013/07/13/14/14/bangladesh-162238_1280.png" },
-  { name: "Russia", image: "https://cdn.pixabay.com/photo/2013/07/13/14/17/russia-162400_1280.png" },
-  { name: "Singapore", image: "https://cdn.pixabay.com/photo/2012/04/10/22/58/singapore-26793_1280.png" },
-  { name: "Afghanistan", image: "https://cdn.pixabay.com/photo/2012/04/10/22/59/afghanistan-26801_1280.png" },
-  { name: "England", image: "https://cdn.pixabay.com/photo/2012/04/11/15/31/united-28519_1280.png" },
+    {
+      name: "Pakistan",
+      image:
+        "https://cdn.pixabay.com/photo/2022/11/18/14/27/flag-7600240_1280.jpg",
+    },
+    {
+      name: "Iran",
+      image:
+        "https://cdn.pixabay.com/photo/2018/12/07/07/43/flag-3861226_1280.jpg",
+    },
+    {
+      name: "China",
+      image:
+        "https://cdn.pixabay.com/photo/2012/04/10/23/05/china-26841_1280.png",
+    },
+    {
+      name: "USA",
+      image:
+        "https://cdn.pixabay.com/photo/2012/04/12/23/52/usa-31021_1280.png",
+    },
+    {
+      name: "India",
+      image:
+        "https://cdn.pixabay.com/photo/2022/06/21/02/47/indian-national-flag-7274918_1280.png",
+    },
+    {
+      name: "Bangladesh",
+      image:
+        "https://cdn.pixabay.com/photo/2013/07/13/14/14/bangladesh-162238_1280.png",
+    },
+    {
+      name: "Russia",
+      image:
+        "https://cdn.pixabay.com/photo/2013/07/13/14/17/russia-162400_1280.png",
+    },
+    {
+      name: "Singapore",
+      image:
+        "https://cdn.pixabay.com/photo/2012/04/10/22/58/singapore-26793_1280.png",
+    },
+    {
+      name: "Afghanistan",
+      image:
+        "https://cdn.pixabay.com/photo/2012/04/10/22/59/afghanistan-26801_1280.png",
+    },
+    {
+      name: "England",
+      image:
+        "https://cdn.pixabay.com/photo/2012/04/11/15/31/united-28519_1280.png",
+    },
   ];
 
   // Debug: log user object

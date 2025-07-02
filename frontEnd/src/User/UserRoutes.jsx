@@ -23,7 +23,7 @@ export default function UserRoutes() {
         {/* Catch-all for unknown routes */}
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
-        <Footer />
+      <Footer />
     </>
   );
 }

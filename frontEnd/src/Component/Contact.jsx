@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
-import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Mail,
+  User,
+  MessageSquare,
+  Send,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
 import "../Css/Contact.css";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState('');
-  const [focusedField, setFocusedField] = useState('');
+  const [error, setError] = useState("");
+  const [focusedField, setFocusedField] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -14,40 +21,42 @@ export default function Contact() {
     // Improved validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!form.name.trim()) {
-      setError('Please enter your name.');
+      setError("Please enter your name.");
       return;
     }
     if (form.name.trim().length < 2) {
-      setError('Name must be at least 2 characters.');
+      setError("Name must be at least 2 characters.");
       return;
     }
     if (!form.email.trim()) {
-      setError('Please enter your email.');
+      setError("Please enter your email.");
       return;
     }
     if (!emailRegex.test(form.email.trim())) {
-      setError('Please enter a valid email address.');
+      setError("Please enter a valid email address.");
       return;
     }
     if (!form.message.trim()) {
-      setError('Please enter your message.');
+      setError("Please enter your message.");
       return;
     }
     if (form.message.trim().length < 10) {
-      setError('Message must be at least 10 characters.');
+      setError("Message must be at least 10 characters.");
       return;
     }
-    setError('');
+    setError("");
     setIsSubmitting(true);
-    
+
     // Simulate loading
     setTimeout(() => {
-      window.location.href = `mailto:ayazhussain4483@gmail.com?subject=Contact from ${encodeURIComponent(form.name)}&body=${encodeURIComponent(
+      window.location.href = `mailto:ayazhussain4483@gmail.com?subject=Contact from ${encodeURIComponent(
+        form.name
+      )}&body=${encodeURIComponent(
         `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
       )}`;
       setIsSubmitting(false);
       setSent(true);
-      setForm({ name: '', email: '', message: '' });
+      setForm({ name: "", email: "", message: "" });
     }, 1000);
   };
 
@@ -60,11 +69,11 @@ export default function Contact() {
             <Mail className="icon" />
           </div>
           <h1>
-            Contact{' '}
-            <span className="brand-text">SatisNation</span>
+            Contact <span className="brand-text">SatisNation</span>
           </h1>
           <p className="hero-description">
-            We'd love to hear from you! Please fill out the form below and our team will get back to you soon.
+            We'd love to hear from you! Please fill out the form below and our
+            team will get back to you soon.
           </p>
         </div>
 
@@ -80,15 +89,21 @@ export default function Contact() {
             <div className="field-group">
               <label className="field-label">Full Name</label>
               <div className="input-wrapper">
-                <User className={`input-icon ${focusedField === 'name' ? 'focused' : ''}`} />
+                <User
+                  className={`input-icon ${
+                    focusedField === "name" ? "focused" : ""
+                  }`}
+                />
                 <input
                   type="text"
                   value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })}
-                  onFocus={() => setFocusedField('name')}
-                  onBlur={() => setFocusedField('')}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  onFocus={() => setFocusedField("name")}
+                  onBlur={() => setFocusedField("")}
                   placeholder="Enter your full name"
-                  className={`form-input ${focusedField === 'name' ? 'focused' : ''}`}
+                  className={`form-input ${
+                    focusedField === "name" ? "focused" : ""
+                  }`}
                   required
                 />
               </div>
@@ -98,15 +113,21 @@ export default function Contact() {
             <div className="field-group">
               <label className="field-label">Email Address</label>
               <div className="input-wrapper">
-                <Mail className={`input-icon ${focusedField === 'email' ? 'focused' : ''}`} />
+                <Mail
+                  className={`input-icon ${
+                    focusedField === "email" ? "focused" : ""
+                  }`}
+                />
                 <input
                   type="email"
                   value={form.email}
-                  onChange={e => setForm({ ...form, email: e.target.value })}
-                  onFocus={() => setFocusedField('email')}
-                  onBlur={() => setFocusedField('')}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  onFocus={() => setFocusedField("email")}
+                  onBlur={() => setFocusedField("")}
                   placeholder="your@email.com"
-                  className={`form-input ${focusedField === 'email' ? 'focused' : ''}`}
+                  className={`form-input ${
+                    focusedField === "email" ? "focused" : ""
+                  }`}
                   required
                 />
               </div>
@@ -116,15 +137,23 @@ export default function Contact() {
             <div className="field-group">
               <label className="field-label">Message</label>
               <div className="input-wrapper">
-                <MessageSquare className={`input-icon textarea-icon ${focusedField === 'message' ? 'focused' : ''}`} />
+                <MessageSquare
+                  className={`input-icon textarea-icon ${
+                    focusedField === "message" ? "focused" : ""
+                  }`}
+                />
                 <textarea
                   value={form.message}
-                  onChange={e => setForm({ ...form, message: e.target.value })}
-                  onFocus={() => setFocusedField('message')}
-                  onBlur={() => setFocusedField('')}
+                  onChange={(e) =>
+                    setForm({ ...form, message: e.target.value })
+                  }
+                  onFocus={() => setFocusedField("message")}
+                  onBlur={() => setFocusedField("")}
                   placeholder="Ask us anything"
                   rows={6}
-                  className={`form-input form-textarea ${focusedField === 'message' ? 'focused' : ''}`}
+                  className={`form-input form-textarea ${
+                    focusedField === "message" ? "focused" : ""
+                  }`}
                   required
                 />
               </div>
@@ -151,7 +180,7 @@ export default function Contact() {
               type="button"
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className={`submit-btn ${isSubmitting ? 'submitting' : ''}`}
+              className={`submit-btn ${isSubmitting ? "submitting" : ""}`}
             >
               {isSubmitting ? (
                 <>

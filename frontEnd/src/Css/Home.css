@@ -1,5 +1,6 @@
 /* Prevent horizontal scroll globally */
-html, body {
+html,
+body {
   width: 100vw;
   max-width: 100vw;
   overflow-x: hidden;
@@ -9,8 +10,6 @@ html, body {
 /* Main containers never overflow */
 .dashboardContainer,
 .featured-country-section,
-.country-scroll-section,
-.country-row,
 .stats-section,
 .stats-container,
 .global-insights,
@@ -36,12 +35,16 @@ html, body {
     text-align: center;
     padding: 18px 8px;
   }
-  .country-row, .global-avg-row, .stats-container {
+  .country-row,
+  .global-avg-row,
+  .stats-container {
     flex-direction: column;
     gap: 18px;
     align-items: center;
   }
-  .country-card, .global-avg-card, .stat {
+  .country-card,
+  .global-avg-card,
+  .stat {
     margin: 8px 0;
     max-width: 100%;
     min-width: 0;
@@ -118,12 +121,24 @@ html, body {
     padding: 8px 2px;
   }
 }
+.country-scroll-section {
+  margin-bottom: 40px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.country-row {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  min-width: fit-content;
+  width: max-content;
+  /* Prevent wrapping so all 5 cards are in one row */
+  flex-wrap: nowrap;
+}
 
 /* Prevent any child from causing overflow */
 .dashboardContainer *,
 .featured-country-section *,
-.country-scroll-section *,
-.country-row *,
 .stats-section *,
 .stats-container *,
 .global-insights *,
@@ -141,8 +156,8 @@ html, body {
   padding: 32px;
   background: #fff;
   border-radius: 18px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
-  font-family: 'Segoe UI', Arial, sans-serif;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .header {
@@ -169,7 +184,7 @@ html, body {
   border-radius: 16px;
   padding: 24px 32px;
   margin-bottom: 36px;
-  box-shadow: 0 2px 12px rgba(33,150,243,0.08);
+  box-shadow: 0 2px 12px rgba(33, 150, 243, 0.08);
 }
 .featured-img-wrap {
   flex: 0 0 180px;
@@ -180,7 +195,7 @@ html, body {
   object-fit: cover;
   border-radius: 12px;
   border: 3px solid #ff9800;
-  box-shadow: 0 2px 8px rgba(255,152,0,0.12);
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.12);
 }
 .featured-country-info {
   flex: 1;
@@ -214,13 +229,13 @@ html, body {
 .country-row {
   display: flex;
   flex-direction: row;
+  width: 100%;
   gap: 32px;
-  min-width: 600px;
 }
 .country-card {
   background: linear-gradient(135deg, #f5f7fa 70%, #e3f2fd 100%);
   border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(26,35,126,0.10);
+  box-shadow: 0 4px 24px rgba(26, 35, 126, 0.1);
   padding: 24px 20px 18px 20px;
   min-width: 320px;
   max-width: 340px;
@@ -233,7 +248,7 @@ html, body {
 }
 .country-card:hover {
   transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 8px 32px rgba(33,150,243,0.18);
+  box-shadow: 0 8px 32px rgba(33, 150, 243, 0.18);
   border: 2px solid #1976d2;
 }
 .country-rank-badge {
@@ -246,7 +261,7 @@ html, body {
   font-weight: 700;
   padding: 7px 18px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(255,152,0,0.12);
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.12);
   z-index: 2;
 }
 .country-flag-wrap {
@@ -261,7 +276,7 @@ html, body {
   border-radius: 10px;
   margin-bottom: 10px;
   border: 2px solid #fff;
-  box-shadow: 0 2px 8px rgba(33,150,243,0.07);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.07);
 }
 .country-title {
   margin-bottom: 8px;
@@ -345,7 +360,7 @@ html, body {
   min-width: 110px;
   font-size: 1.1rem;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(33,150,243,0.10);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
 }
 .global-label {
   display: block;
@@ -364,7 +379,7 @@ html, body {
   padding: 32px 18px;
   text-align: center;
   margin: 40px 0 32px 0;
-  box-shadow: 0 2px 12px rgba(33,150,243,0.10);
+  box-shadow: 0 2px 12px rgba(33, 150, 243, 0.1);
 }
 .cta-btn {
   background: #fff;
@@ -398,7 +413,7 @@ html, body {
   background: #f9fafb;
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 4px rgba(26,35,126,0.03);
+  box-shadow: 0 1px 4px rgba(26, 35, 126, 0.03);
   flex: 1 1 120px;
   min-width: 120px;
   max-width: 180px;
@@ -439,12 +454,16 @@ html, body {
     gap: 18px;
     text-align: center;
   }
-  .country-row, .global-avg-row, .stats-container {
+  .country-row,
+  .global-avg-row,
+  .stats-container {
     flex-direction: column;
     gap: 18px;
     align-items: center;
   }
-  .country-card, .global-avg-card, .stat {
+  .country-card,
+  .global-avg-card,
+  .stat {
     margin: 8px 0;
     max-width: 100%;
   }

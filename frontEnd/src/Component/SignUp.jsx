@@ -45,9 +45,8 @@ export default function SignUp() {
         if (!res.ok) {
           setServerError(data?.error || "Signup failed.");
         } else if (data.success) {
-          
           // alert("Signup successful! Redirecting to login...");
-           navigate("/login");
+          navigate("/login");
           <Link to="/login" />;
         } else {
           setServerError("Something went wrong.");
@@ -127,9 +126,10 @@ export default function SignUp() {
               onChange={formik.handleChange}
               disabled={formik.isSubmitting}
             />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <div className="error-msg">{formik.errors.confirmPassword}</div>
-            )}
+            {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword && (
+                <div className="error-msg">{formik.errors.confirmPassword}</div>
+              )}
           </div>
 
           {serverError && <div className="error-msg">{serverError}</div>}
@@ -153,7 +153,7 @@ export default function SignUp() {
 
         <div className="login-footer">
           <p className="signup-redirect">
-            Already have an account? <Link  to="/login">Log In</Link>
+            Already have an account? <Link to="/login">Log In</Link>
           </p>
         </div>
       </div>

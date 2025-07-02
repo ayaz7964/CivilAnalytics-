@@ -1,11 +1,7 @@
-
-
-
-
 .FooterPro {
   background: #1a1a1a;
   color: #e5e5e5;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   margin-top: 60px;
 }
 
@@ -238,7 +234,7 @@
     grid-template-columns: 2fr 1fr 1fr;
     gap: 35px;
   }
-  
+
   .FooterPro-Column:nth-child(4),
   .FooterPro-Column:nth-child(5) {
     grid-column: 2 / -1;
@@ -252,28 +248,28 @@
   .FooterPro-Main {
     padding: 40px 20px 30px;
   }
-  
+
   .FooterPro-Top {
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  
+
   .FooterPro-Bottom {
     flex-direction: column;
     gap: 15px;
     text-align: center;
   }
-  
+
   .FooterPro-Legal {
     justify-content: center;
   }
-   .newsletter{
+  .newsletter {
     margin-left: -50%;
   }
-  .resources{
+  .resources {
     margin-left: -45%;
   }
-  
+
   .FooterPro-Newsletter {
     margin-top: 20px;
     padding-top: 15px;
@@ -284,43 +280,41 @@
   .FooterPro-Main {
     padding: 30px 15px 20px;
   }
-  
+
   .FooterPro-Logo {
     justify-content: center;
     text-align: center;
   }
-  
+
   .FooterPro-Brand {
     text-align: center;
     padding-right: 0;
   }
-  
+
   .FooterPro-Social {
     justify-content: center;
   }
-  
+
   .FooterPro-NewsletterForm {
     flex-direction: column;
     gap: 3px;
-  
-
   }
-  .FooterPro-Column{
+  .FooterPro-Column {
     width: 50%;
     flex-direction: column;
-     /* margin-left: -45%; */
+    /* margin-left: -45%; */
   }
 
-  .newsletter{
+  .newsletter {
     margin-left: -50%;
   }
-  .resources{
-    margin-left: -45%;
+  .resources {
+    margin-left: -50%;
   }
   .FooterPro-NewsletterInput {
     border-radius: 5px;
   }
-  
+
   .FooterPro-NewsletterBtn {
     border-radius: 5px;
     padding: 12px 15px;
