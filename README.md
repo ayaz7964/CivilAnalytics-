@@ -2,7 +2,7 @@
 
 A full-stack web application for civil data analytics, featuring a modern React frontend and a Node.js/Express backend. Built and maintained by Suman and Ayaz.
 
-[Live Demo](https://civil-analytics.vercel.app) | [GitHub Repo](https://github.com/ayaz7964/SatisNation.git)
+[Live Demo](https://satisnation.vercel.app/) | [GitHub Repo](https://github.com/ayaz7964/SatisNation.git)
 
 ---
 
