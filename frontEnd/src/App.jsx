@@ -1,8 +1,6 @@
-
-
-import React from 'react'
-import Routing from './Component/Routing'
-import UserRoutes from './User/UserRoutes'
+import React from "react";
+import Routing from "./Component/Routing";
+import UserRoutes from "./User/UserRoutes";
 import { UserProvider, useUser } from "./User/UserContext";
 
 function AppContent() {
@@ -13,13 +11,12 @@ function AppContent() {
 
   // return isLoggedIn ? <UserRoutes /> : <Routing />;
 
-  
-if (state.user) {
-  return <UserRoutes />;
-}
-  else {
+  if (state.user) {
+    return <UserRoutes />;
+  } else {
     return <Routing />;
-}}
+  }
+}
 
 export default function App() {
   return (

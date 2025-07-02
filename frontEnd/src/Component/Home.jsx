@@ -325,31 +325,6 @@ export default function Home() {
         <StatsSection />
       </div>
 
-      {/* <div className="stats-section">
-        <h2>Platform Statistics</h2>
-        <div className="stats-container">
-          <div className="stat">
-            <div className="circle">10K+</div>
-            <p>People Joined</p>
-          </div>
-          <div className="stat">
-            <div className="circle">50+</div>
-            <p>Countries</p>
-          </div>
-          <div className="stat">
-            <div className="circle">100+</div>
-            <p>Categories</p>
-          </div>
-          <div className="stat">
-            <div className="circle">5K+</div>
-            <p>Total Surveys</p>
-          </div>
-          <div className="stat">
-            <div className="circle">500+</div>
-            <p>Team Members</p>
-          </div>
-        </div>
-      </div> */}
 
       {/* Motivational Quote */}
       <div className="quoteSection">

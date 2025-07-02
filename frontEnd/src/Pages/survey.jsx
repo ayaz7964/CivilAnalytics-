@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useRef } from "react";
 import { useUser } from "../User/UserContext";
 import "../Css/Survey.css";
@@ -123,11 +121,11 @@ export default function Survey() {
       try {
         const res = await fetch(`/api/profile/username/${state.user.username}`);
         if (!res.ok) {
-          setUsername('Null')
-          setCountry('Null')
+          setUsername("Null");
+          setCountry("Null");
           console.log("Failed to load user profile. Please try again. N/A");
 
-          return 
+          return;
         }
         const data = await res.json();
         if (data && data.country) {
@@ -169,10 +167,13 @@ export default function Survey() {
           const data = await res.json();
           if (data && data.createdAt) {
             const created = new Date(data.createdAt);
-            const nextAllowed = new Date(created.getTime() + 30 * 24 * 60 * 60 * 1000);
+            const nextAllowed = new Date(
+              created.getTime() + 30 * 24 * 60 * 60 * 1000
+            );
             if (nextAllowed > new Date()) {
               setNextAllowedDate(nextAllowed);
-              const seconds = Math.floor((nextAllowed.getTime() - Date.now()) / 1000) + 1;
+              const seconds =
+                Math.floor((nextAllowed.getTime() - Date.now()) / 1000) + 1;
               setCountdown(seconds > 0 ? seconds : 0);
             }
           }
@@ -221,7 +222,9 @@ export default function Survey() {
     if (missing !== -1) {
       setMissingIdx(missing);
       setPopup(
-        `You missed question #${missing + 1} in "${currentDomain.label}". Please answer all questions before continuing.`
+        `You missed question #${missing + 1} in "${
+          currentDomain.label
+        }". Please answer all questions before continuing.`
       );
       return;
     }
@@ -308,18 +311,22 @@ export default function Survey() {
   }));
   const totalScore = domainScores.reduce((a, b) => a + b.score, 0);
 
-  if(username == 'Null' && country == 'Null'){
-    return <div className="survey-tab-container">
-        <div className="survey-info-card">Please Add Profile Details First  , Then Survey Will be Started   .</div>
-        
-
+  if (username == "Null" && country == "Null") {
+    return (
+      <div className="survey-tab-container">
+        <div className="survey-info-card">
+          Please Add Profile Details First , Then Survey Will be Started .
+        </div>
       </div>
+    );
   }
 
   if (!userObj)
     return (
       <div className="survey-tab-container">
-        <div className="survey-info-card">Please log in to take the survey.</div>
+        <div className="survey-info-card">
+          Please log in to take the survey.
+        </div>
       </div>
     );
 
@@ -346,7 +353,8 @@ export default function Survey() {
         <div className="survey-info-card animate-fadein">
           <h2>Thank you for completing the survey!</h2>
           <p>
-            Your feedback helps us understand and improve quality of life in your country.
+            Your feedback helps us understand and improve quality of life in
+            your country.
           </p>
           <div className="survey-summary">
             <h3>Your Scores</h3>
@@ -375,14 +383,17 @@ export default function Survey() {
       {/* Popup for errors or info */}
       {popup && (
         <div className="survey-popup-overlay" onClick={() => setPopup("")}>
-          <div className="survey-popup" onClick={e => e.stopPropagation()}>
+          <div className="survey-popup" onClick={(e) => e.stopPropagation()}>
             <div className="survey-popup-message">{popup}</div>
             {nextAllowedDate && (
               <div style={{ margin: "10px 0", color: "#888" }}>
                 Next allowed: {new Date(nextAllowedDate).toLocaleString()}
               </div>
             )}
-            <button className="survey-btn survey-btn-primary" onClick={() => setPopup("")}>
+            <button
+              className="survey-btn survey-btn-primary"
+              onClick={() => setPopup("")}
+            >
               OK
             </button>
           </div>
@@ -393,24 +404,30 @@ export default function Survey() {
         <div className="survey-info-card animate-fadein">
           <h2>Welcome to the National Quality of Life Survey</h2>
           <p>
-            <span className="font-semibold">User:</span> <span className="text-blue-600">{username}</span>
+            <span className="font-semibold">User:</span>{" "}
+            <span className="text-blue-600">{username}</span>
             <br />
-            <span className="font-semibold">Country:</span> <span className="text-green-600">{country}</span>
+            <span className="font-semibold">Country:</span>{" "}
+            <span className="text-green-600">{country}</span>
           </p>
           <p>
-            This professional survey helps us assess satisfaction across key areas of life in your country.
+            This professional survey helps us assess satisfaction across key
+            areas of life in your country.
             <br />
             <strong>Instructions:</strong>
             <ul>
               <li>Answer each question honestly based on your experience.</li>
               <li>
-                Each question is scored: <b>0</b> (Not at all), <b>1</b> (Somewhat), <b>2</b> (Yes/Very satisfied).
+                Each question is scored: <b>0</b> (Not at all), <b>1</b>{" "}
+                (Somewhat), <b>2</b> (Yes/Very satisfied).
               </li>
               <li>
-                Each domain is worth <b>20 points</b>. Your total satisfaction score is out of <b>100</b>.
+                Each domain is worth <b>20 points</b>. Your total satisfaction
+                score is out of <b>100</b>.
               </li>
               <li>
-                Progress is saved as you go. You can review answers before submitting.
+                Progress is saved as you go. You can review answers before
+                submitting.
               </li>
             </ul>
           </p>
@@ -423,7 +440,14 @@ export default function Survey() {
               Start Survey
             </button>
           ) : (
-            <div style={{ color: "red", fontWeight: "bold", fontSize: 18, marginTop: 16 }}>
+            <div
+              style={{
+                color: "red",
+                fontWeight: "bold",
+                fontSize: 18,
+                marginTop: 16,
+              }}
+            >
               You can start the survey again after: {formatCountdown(countdown)}
             </div>
           )}
@@ -437,7 +461,10 @@ export default function Survey() {
             />
           </div>
           <h2>
-            {DOMAINS[step].label} <span className="survey-step">{step + 1} / {DOMAINS.length}</span>
+            {DOMAINS[step].label}{" "}
+            <span className="survey-step">
+              {step + 1} / {DOMAINS.length}
+            </span>
           </h2>
           <div className="survey-domain-progress">
             <div className="survey-domain-progress-bar">
@@ -447,7 +474,8 @@ export default function Survey() {
               />
             </div>
             <span>
-              {answers[DOMAINS[step].key].filter((v) => v !== null).length} / 10 answered
+              {answers[DOMAINS[step].key].filter((v) => v !== null).length} / 10
+              answered
             </span>
           </div>
           <form
@@ -461,7 +489,8 @@ export default function Survey() {
               {DOMAINS[step].questions.map((q, idx) => (
                 <div
                   className={`survey-question animate-fadein ${
-                    answers[DOMAINS[step].key][idx] === null && missingIdx === idx
+                    answers[DOMAINS[step].key][idx] === null &&
+                    missingIdx === idx
                       ? "border-2 border-red-500 bg-red-50 rounded-md"
                       : ""
                   }`}
@@ -484,21 +513,24 @@ export default function Survey() {
                           type="radio"
                           name={`q${idx}`}
                           value={opt.value}
-                          checked={answers[DOMAINS[step].key][idx] === opt.value}
+                          checked={
+                            answers[DOMAINS[step].key][idx] === opt.value
+                          }
                           onChange={() =>
                             handleChange(DOMAINS[step].key, idx, opt.value)
                           }
                           required
                         />
-                        {opt.label} 
+                        {opt.label}
                       </label>
                     ))}
                   </div>
-                  {answers[DOMAINS[step].key][idx] === null && missingIdx === idx && (
-                    <div className="text-red-600 text-sm mt-1">
-                      Please answer question #{idx + 1}
-                    </div>
-                  )}
+                  {answers[DOMAINS[step].key][idx] === null &&
+                    missingIdx === idx && (
+                      <div className="text-red-600 text-sm mt-1">
+                        Please answer question #{idx + 1}
+                      </div>
+                    )}
                 </div>
               ))}
             </div>
@@ -527,6 +559,3 @@ export default function Survey() {
     </div>
   );
 }
-
-
-

@@ -2,10 +2,12 @@
 html {
   box-sizing: border-box;
   width: 100vw;
-  max-width: 100vw;         /* Add this line */
+  max-width: 100vw; /* Add this line */
   overflow-x: hidden;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 body {
@@ -17,7 +19,8 @@ body {
 }
 
 /* 2. Ensure .about-container and .about-wrapper don't overflow */
-.about-container, .about-wrapper {
+.about-container,
+.about-wrapper {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
@@ -28,12 +31,12 @@ body {
   min-width: 0;
   width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;       /* Add this line */
+  overflow-x: hidden; /* Add this line */
 }
 .column {
   min-width: 0;
   box-sizing: border-box;
-  overflow-x: hidden;       /* Add this line */
+  overflow-x: hidden; /* Add this line */
 }
 
 /* Prevent horizontal scroll on all sections */
@@ -41,8 +44,8 @@ body {
 .content-section,
 .hero-section,
 .cta-section {
-  max-width: 100vw;         /* Add this line */
-  overflow-x: hidden;       /* Add this line */
+  max-width: 100vw; /* Add this line */
+  overflow-x: hidden; /* Add this line */
 }
 
 /* About.css */
@@ -243,42 +246,42 @@ body {
   .about-wrapper {
     padding: 0 15px;
   }
-  
+
   .hero-section {
     padding: 60px 0 40px 0;
     margin-bottom: 40px;
   }
-  
+
   .main-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.2rem;
   }
-  
+
   .section-heading {
     font-size: 1.8rem;
   }
-  
+
   .two-column-section {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .column {
     padding: 20px;
   }
-  
+
   .cta-section {
     padding: 30px 20px;
     margin-top: 40px;
   }
-  
+
   .cta-text {
     font-size: 1.1rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
     margin-bottom: 30px;
@@ -289,15 +292,15 @@ body {
   .main-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
+
   .section-heading {
     font-size: 1.5rem;
   }
-  
+
   .subsection-heading {
     font-size: 1.3rem;
   }

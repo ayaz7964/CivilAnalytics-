@@ -9,7 +9,7 @@
   padding: 0 2.5rem;
   height: 72px;
   box-shadow: 0 4px 18px rgba(15, 85, 98, 0.15);
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -102,7 +102,7 @@
 }
 
 .NavBar-Link::after {
-  content: '';
+  content: "";
   display: block;
   width: 0;
   height: 2.5px;

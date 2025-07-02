@@ -25,10 +25,19 @@ export default function UserNavBar() {
       </div>
 
       {/* Mobile Menu Toggle */}
-      <div className="NavBar-MenuToggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}></span>
-        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}></span>
-        <span className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}></span>
+      <div
+        className="NavBar-MenuToggle"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <span
+          className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}
+        ></span>
+        <span
+          className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}
+        ></span>
+        <span
+          className={`NavBar-MenuToggle-Bar ${isMenuOpen ? "active" : ""}`}
+        ></span>
       </div>
 
       <ul className={`NavBar-Links ${isMenuOpen ? "active" : ""}`}>

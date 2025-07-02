@@ -68,7 +68,7 @@ button:focus-visible {
 } */
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
   background: linear-gradient(135deg, #f0f6ff 0%, #e0f2fe 60%, #e3ecfc 100%);

@@ -1,136 +1,136 @@
 .signup-bg {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #4f99a4, #327d87);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4f99a4, #327d87);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .signup-card {
-    display: flex;
-    width: 900px;
-    min-height: 520px;
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+  display: flex;
+  width: 900px;
+  min-height: 520px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .signup-image-section {
-    flex: 1;
-    background: #e3f2fd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
+  flex: 1;
+  background: #e3f2fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 }
 
 .signup-image {
-    width: 90%;
-    max-width: 340px;
-    object-fit: cover;
-    border-radius: 20px;
+  width: 90%;
+  max-width: 340px;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 .signup-form-section {
-    flex: 1;
-    background: linear-gradient(to bottom right, #f4f6f8, #dbe6e4);
-    padding: 48px 36px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  flex: 1;
+  background: linear-gradient(to bottom right, #f4f6f8, #dbe6e4);
+  padding: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .signup-form-section h1 {
-    margin-bottom: 18px;
-    color: #223040;
-    font-size: 2.25rem;
-    font-weight: 700;
-    text-align: center;
+  margin-bottom: 18px;
+  color: #223040;
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .signup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 label {
-    font-weight: 500;
-    color: #223040;
-    font-size: 1rem;
+  font-weight: 500;
+  color: #223040;
+  font-size: 1rem;
 }
 
 input {
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 1px solid #cdd9e1;
-    font-size: 1rem;
-    background: #ffffff;
-    color: #223040;
-    outline: none;
-    transition: border 0.2s;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #cdd9e1;
+  font-size: 1rem;
+  background: #ffffff;
+  color: #223040;
+  outline: none;
+  transition: border 0.2s;
 }
 
 input:focus {
-    border: 1.5px solid #00bcd4;
+  border: 1.5px solid #00bcd4;
 }
 
 .input-error {
-    border: 1.5px solid #e74c3c;
-    background: #fff0f0;
+  border: 1.5px solid #e74c3c;
+  background: #fff0f0;
 }
 
 .error {
-    color: #e74c3c;
-    font-size: 0.9rem;
-    margin-top: 2px;
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 2px;
 }
 
 .server-error {
-    color: #e74c3c;
-    font-size: 1rem;
-    margin-bottom: 8px;
-    text-align: center;
+  color: #e74c3c;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  text-align: center;
 }
 
 .signup-button {
-    margin-top: 10px;
-    padding: 12px 0;
-    background: #00bcd4;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  margin-top: 10px;
+  padding: 12px 0;
+  background: #00bcd4;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .signup-button:hover {
-    background: #0097a7;
+  background: #0097a7;
 }
 
 .login-link {
-    margin-top: 18px;
-    text-align: center;
-    color: #223040;
-    font-size: 0.95rem;
+  margin-top: 18px;
+  text-align: center;
+  color: #223040;
+  font-size: 0.95rem;
 }
 
 .login-link a {
-    color: #00bcd4;
-    text-decoration: none;
-    font-weight: 600;
+  color: #00bcd4;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .login-link a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
