@@ -1,8 +1,7 @@
-
-
 import React, { useState, useEffect, useRef } from "react";
 import { useUser } from "../User/UserContext";
 import "../Css/Survey.css";
+import { Link } from "react-router-dom";
 
 const DOMAINS = [
   {
@@ -310,9 +309,21 @@ export default function Survey() {
 
   if(username == 'Null' && country == 'Null'){
     return <div className="survey-tab-container">
-        <div className="survey-info-card">Please Add Profile Details First  , Then Survey Will be Started   .</div>
-        
-
+        <div className="survey-info-card survey-warning-message">
+          <span className="icon" aria-label="info">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="12" fill="#90caf9"/>
+              <rect x="11" y="7" width="2" height="2" rx="1" fill="#1565c0"/>
+              <rect x="11" y="11" width="2" height="6" rx="1" fill="#1565c0"/>
+            </svg>
+          </span>
+          <span style={{ flex: 1 }}>
+            Please add <b>profile details</b> first, then the survey will be started.
+          </span>
+          <Link to="/profile" className="survey-btn survey-btn-primary" style={{ marginLeft: 16 }}>
+            Go to Profile
+          </Link>
+        </div>
       </div>
   }
 

@@ -190,6 +190,9 @@ html, body {
   color: #757575;
   font-weight: 500;
 }
+.leaderboard-header-row .leaderboard-users-col {
+  color: #fff;
+}
 @media (max-width: 900px) {
   .leaderboard-header-row, .leaderboard-row {
     flex-direction: column;
