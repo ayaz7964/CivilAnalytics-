@@ -42,33 +42,47 @@ body {
 }
 
 @media (max-width: 600px) {
-  .leaderboard-table {
-    padding: 0 2px;
-    border-radius: 8px;
-  }
   .leaderboard-header-row,
   .leaderboard-row {
-    padding: 8px 2px;
-    font-size: 0.98rem;
-  }
-  .leaderboard-flag-col {
-    gap: 8px;
-  }
-  .leaderboard-flag {
-    width: 32px;
-    height: 22px;
+    font-size: 1.05rem;
+    gap: 12px;
   }
   .leaderboard-country-name {
-    font-size: 0.98rem;
+    font-size: 1.08rem;
+    font-weight: 700;
+    margin-left: 4px;
   }
   .leaderboard-score-value {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-left: 8px;
+    width: 15%;
+  }
+  .leaderboard-bar {
+    height: 16px;
+    margin: 6px 0;
+  }
+  .leaderboard-users-col {
     font-size: 0.98rem;
+    margin-top: 2px;
+  }
+  .leaderboard-score-col{
+    width: 100% !important;
   }
 }
 
 @media (max-width: 400px) {
   .leaderboard-table {
     padding: 0 1px;
+  }
+  .leaderboard-score-value {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-left: 8px;
+    width: 20% !important;
+  }
+   .leaderboard-score-col{
+    width: 100% !important;
   }
   .leaderboard-header-row,
   .leaderboard-row {
